@@ -27,16 +27,20 @@ bucket_manager = None
 
 
 @click.group()
-@click.option('--profile',default='None',
+@click.option('--profile',default=None,
     help="Use a given AWS profile.")
 def cli(profile):
     """Webotron deploys websites to AWS."""
     global session, bucket_manager
     session_cfg = {}
-    session_cfg['profile_name'] = 'pythonAutomation'
-    if profile:
+    #session_cfg['profile_name'] = 'pythonAutomation'
+    if (profile != None):
+        print(1)
         session_cfg['profile_name'] = profile
-
+    else:
+        print(2)
+        session_cfg['profile_name'] = 'pythonAutomation'
+    print(session_cfg)
     session = boto3.Session(**session_cfg)
     # Session(profile_name="pythonAutomation")
     bucket_manager = BucketManager(session)
