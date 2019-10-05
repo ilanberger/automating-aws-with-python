@@ -1,0 +1,395 @@
+    1  ls
+    2  ls-d
+    3  ls -d
+    4  ls --help
+    5  ls -help
+    6  cd..
+    7  nedit
+    8  edit
+    9  ls -l 
+   10  find -type d dowloads
+   11  man find
+   12  find -type d 
+   13  find -type d D*
+   14  find -type d -name D*
+   15  man type
+   16  man find
+   17  find -type f -name *0080
+   18  find . -type d -name *0080
+   19  find . -type d -name Down
+   20  find . -type d -name Down*
+   21  ls -l ./Downloads/
+   22  ls -l ./Downloads/ *.dmp
+   23  ls -l ./Downloads/ | grp dmg
+   24  ls -l ./Downloads/ | grep dmg
+   25  ls
+   26  ls -l
+   27  man pin
+   28   
+   29  ls
+   30  cd dropbox
+   31  ls
+   32  cd Photos/
+   33  ls
+   34  fid -name "dad*"
+   35  find -name "dad*"
+   36  find -name . "dad*"
+   37  find . -name "dad*"
+   38  find . -name "*dng"
+   39  find . -name "*dng" >list_dng_file.txt
+   40  less list_dng_file.txt 
+   41  find . -name "*dng" 
+   42  man
+   43  manual
+   44  help
+   45  alias
+   46  cd~
+   47  cd ~
+   48  ls
+   49  ls -a
+   50  less .dropbox/
+   51  less .dropbox
+   52  ls -a -l
+   53  l/Users/iberger/Pictures/Apple\ TV\ Photo\ Cache/Photo\ Database ; exit;
+   54  pwd
+   55  ltr
+   56  ls
+   57  cd Dropbox
+   58  ls
+   59  cd Photos
+   60  ls
+   61  jhead IMG_3964.JPG
+   62  jhead
+   63  exif
+   64  stat
+   65  man stat
+   66  stat -f %SB IMG_3966.JPG
+   67  ls
+   68  stat -f %SB IMG_3966.JPG
+   69  ipi
+   70  pip
+   71  pip install exifread
+   72  pip install --upgrade pip
+   73  exit
+   74  close
+   75  exit() quit
+   76  pwd
+   77  ls
+   78  cd ~
+   79  ps
+   80  ls -a
+   81  /Library/Application\ Support/Microsoft/MAU2.0/Microsoft\ AutoUpdate.app/Contents/MacOS/Microsoft\ AutoUpdate ; exit;
+   82   . /Users/iberger/.local/share/virtualenvs/automating-aws-with-python-tKid7KGF/bin/activate
+   83  python webotron/webotron.py 
+   84  python webotron/webotron.py 
+   85  import boto3
+   86  pipenv shell
+   87  import boto3
+   88  pipenv run ipython
+   89  pwd
+   90  ls
+   91  cd 01-webotron/
+   92  pipenv run ipython
+   93  ls
+   94  cd ..
+   95  ls
+   96  mv -r webotron 01-webotron
+   97  mv webotron 01-webotron
+   98  pwd
+   99  cd 01-webotron/
+  100  python webotron/webotron.py 
+  101  python ipythonsession.py 
+  102  exit() exit
+  103   . /Users/iberger/.local/share/virtualenvs/01-webotron-sfzOz_tf/bin/activate
+  104  python webotron/webotron.py 
+  105  python webotron/webotron.py arg1 arg2 --arg3
+  106  python webotron/webotron.py arg1 arg2 --arg3
+  107  python webotron/webotron.py arg1 arg2 --arg3
+  108  pipenv install click
+  109  python webotron/webotron.py arg1 arg2 --arg3
+  110  python webotron/webotron.py arg1 arg2 --arg3
+  111  python webotron/webotron.py
+  112  python webotron/webotron.py --help
+  113  python webotron/webotron.py --help
+  114  python webotron/webotron.py --list-buckets
+  115  python webotron/webotron.py list-buckets
+  116  python webotron/webotron.py --help
+  117  python webotron/webotron.py --help
+  118  python webotron/webotron.py --help
+  119  python webotron/webotron.py --help
+  120  python webotron/webotron.py list-bucket-objects 
+  121  python webotron/webotron.py list-bucket-objects 
+  122  python webotron/webotron.py list-bucket-objects
+  123  python webotron/webotron.py list-bucket-objects --help
+  124  python webotron/webotron.py list-bucket-objects automatingawsilanberger-boto3
+  125  python webotron/webotron.py list-bucket-objects automatingawsilanberger-boto1
+  126  git status
+  127  git add . 
+  128  git commit -m "use click to organize webotron scripts"
+  129  git push
+  130  /וןא
+  131  quit
+  132  quit() exit
+  133  pipenv run ipthyon
+  134  cd ..
+  135  pwd
+  136  pipenv run ipthyon
+  137  ls
+  138  cd ~
+  139  ls
+  140  xs drop
+  141  cd Dropbox/education/
+  142  ls
+  143  cd aws
+  144  ls
+  145  cd automating-aws-with-python/
+  146  ls -a
+  147  git status
+  148  git branch -vv
+  149  mkdir 01-webotron
+  150  cd 01-webotron/
+  151  pipenv --three
+  152  pipenv install boto3
+  153  cat Pipfile
+  154  ls
+  155  pipenv install -d ipython
+  156  pipenv run ipython
+  157  ls
+  158  cat ipythonsession.py
+  159  pipenv run ipython -i ipythonsession.py
+  160  ls
+  161  atom ipythonsession.py
+  162  pipenv run ipython -i ipythonsession.py
+  163  pipenv run ipython -i ipythonsession.py
+  164  cd ..
+  165  ls
+  166  geany README.md
+  167  atom README.md
+  168  git stats
+  169  git status
+  170  git add .
+  171  git status
+  172  git commit -m "setup project directory for webotron"
+  173  git push
+  174  ls
+  175  mkdir webotron
+  176  atom .
+  177  pipenv run python webotron/webotron.py 
+  178  pipenv shell
+  179  ls
+  180  pipenv run ipython 01-webotron/webotron/webotron.py 
+  181  cd 01-webotron/
+  182  pipenv run ipython webotron/webotron.py 
+  183  pipenv shell 
+  184   . /Users/iberger/.local/share/virtualenvs/01-webotron-sfzOz_tf/bin/activate
+  185  pwd
+  186  python webotron/webotron.py sync kitten_web/
+  187  python webotron/webotron.py sync kitten_web/
+  188  python webotron/webotron.py sync kitten_web/
+  189  python webotron/webotron.py sync kitten_web
+  190  python webotron/webotron.py sync 
+  191  python webotron/webotron.py sync sdfs
+  192  pwd
+  193  ls
+  194  python webotron/webotron.py sync kitten_web
+  195  python webotron/webotron.py sync kitten_web
+  196  python webotron/webotron.py sync kitten_web
+  197  python webotron/webotron.py sync kitten_web
+  198  exit
+  199   . /Users/iberger/.local/share/virtualenvs/01-webotron-sfzOz_tf/bin/activate
+  200  python webotron/webotron.py --help
+  201  python webotron/webotron.py --help
+  202  atom index.html
+  203  open index.html 
+  204  python webotron/webotron.py --help
+  205  python webotron/webotron.py list-buckets
+  206  ipython
+  207  python webotron/webotron.py setup-bucket --help
+  208  python webotron/webotron.py setup-bucket automatingawsilanberger-newbucket3
+  209  python webotron/webotron.py setup-bucket automatingawsilanberger-newbucket3
+  210  python webotron/webotron.py setup-bucket automatingawsilanberger-newbucket3
+  211  python webotron/webotron.py setup-bucket automatingawsilanberger-newbucket3
+  212  git status
+  213  git commit -am "add create and set up bucket and sync directory""
+  214  git commit -am "add create and set up bucket and sync directory"
+  215  git push
+  216  ls
+  217  cd Desktop/
+  218  cd ../Dropbox/education/aws/
+  219  ls
+  220  cd automating-aws-with-python/
+  221  ls
+  222  pipenv run ipython
+  223  ls
+  224  cd 01-webotron/
+  225  pipenv run ipython
+  226  pipenv shell
+  227  clear
+  228  pwd
+  229  pipenc shell
+  230  pipenv shell
+  231   . /Users/iberger/.local/share/virtualenvs/01-webotron-sfzOz_tf/bin/activate
+  232  python webotron/webotron.py 
+  233  python webotron/webotron.py 
+  234  python webotron/webotron.py list-buckets
+  235  python webotron/webotron.py list-buckets-objects automatingawsilanberger-console
+  236  python webotron/webotron.py list-bucket-objects automatingawsilanberger-console
+  237  ls
+  238  pwd
+  239  python webotron/webotron.py sync /Users/iberger/Dropbox/education/aws/automating-aws-with-python/01-webotron/kitten_web/ automatingawsilanberger-boto3
+  240  python webotron/webotron.py sync /Users/iberger/Dropbox/education/aws/automating-aws-with-python/01-webotron/kitten_web/ automatingawsilanberger-boto3
+  241  python webotron/webotron.py sync /Users/iberger/Dropbox/education/aws/automating-aws-with-python/01-webotron/kitten_web/ automatingawsilanberger-boto3
+  242  pipenv install -d pycodestyle
+  243  pycodestyle webotron/webotron.py 
+  244  pycodestyle webotron/webotron.py 
+  245  clear
+  246  pycodestyle webotron/webotron.py 
+  247  aaaaaaaa
+  248  pycodestyle webotron/webotron.py 
+  249  pycodestyle webotron/webotron.py 
+  250  pycodestyle webotron/webotron.py 
+  251  pycodestyle webotron/webotron.py 
+  252  clear;pycodestyle webotron/webotron.py 
+  253  clear;pycodestyle webotron/webotron.py 
+  254  clear;pycodestyle webotron/webotron.py 
+  255  clear;pycodestyle webotron/webotron.py 
+  256  clear;pycodestyle webotron/webotron.py 
+  257  clear;pycodestyle webotron/webotron.py 
+  258  clear;pycodestyle webotron/webotron.py 
+  259  clear;pycodestyle webotron/webotron.py 
+  260  clear;pycodestyle webotron/webotron.py 
+  261  clear;pycodestyle webotron/webotron.py 
+  262  clear;pycodestyle webotron/webotron.py 
+  263  clear;pycodestyle webotron/webotron.py 
+  264  clear;pycodestyle webotron/webotron.py 
+  265  clear;pycodestyle webotron/webotron.py 
+  266  clear;pycodestyle webotron/webotron.py 
+  267  clear;pycodestyle webotron/webotron.py 
+  268  clear;pycodestyle webotron/webotron.py 
+  269  clear;pycodestyle webotron/webotron.py 
+  270  clear;pycodestyle webotron/webotron.py 
+  271  clear;pycodestyle webotron/webotron.py 
+  272  clear;pycodestyle webotron/webotron.py 
+  273  clear;pycodestyle webotron/webotron.py 
+  274  clear;pycodestyle webotron/webotron.py 
+  275  clear;pycodestyle webotron/webotron.py 
+  276  clear;pycodestyle webotron/webotron.py 
+  277  clear;pycodestyle webotron/webotron.py 
+  278  clear;pycodestyle webotron/webotron.py 
+  279  clear;pycodestyle webotron/webotron.py 
+  280  clear;pycodestyle webotron/webotron.py 
+  281  clear;pycodestyle webotron/webotron.py 
+  282  clear;pycodestyle webotron/webotron.py 
+  283  clear;pycodestyle webotron/webotron.py 
+  284  clear;pycodestyle webotron/webotron.py 
+  285  clear;pycodestyle webotron/webotron.py 
+  286  clear;pycodestyle webotron/webotron.py 
+  287  clear;pycodestyle webotron/webotron.py 
+  288  clear;pycodestyle webotron/webotron.py 
+  289  clear;pycodestyle webotron/webotron.py 
+  290  clear;pycodestyle webotron/webotron.py 
+  291  clear;pycodestyle webotron/webotron.py 
+  292  clear;pycodestyle webotron/webotron.py 
+  293  clear;pycodestyle webotron/webotron.py 
+  294  clear;pycodestyle webotron/webotron.py 
+  295  clear;pycodestyle webotron/webotron.py 
+  296  clear;pycodestyle webotron/webotron.py 
+  297  clear;pycodestyle webotron/webotron.py 
+  298  clear;pycodestyle webotron/webotron.py 
+  299  pipenv install -d pydocsty
+  300  pipenv install -d pydocstle
+  301  pipenv install -d pydocstyle
+  302  pipenv install -d pydocstyle
+  303  pipenv lock --clear
+  304  clear
+  305  pipenv install -d pydocstyle
+  306  pipenv lock --clear
+  307  pipenv lock --pre
+  308  pwd
+  309  ls
+  310  atom .
+  311  cd 01-webotron/
+  312  pipenc shell
+  313  pipenv shell
+  314   . /Users/iberger/.local/share/virtualenvs/automating-aws-with-python-tKid7KGF/bin/activate
+  315  pipenv install -d pydocstyle
+  316  ls
+  317  cd 01-webotron/
+  318  pydocstyle webotron/webotron.py 
+  319  clear;pydocstyle webotron/webotron.py 
+  320  clear;pydocstyle webotron/webotron.py 
+  321  clear;pydocstyle webotron/webotron.py 
+  322  clear;pydocstyle webotron/webotron.py 
+  323  pipenv install -d pylint
+  324  git status
+  325  git add .
+  326  git commit -m "fix up code + missining lecture"
+  327  git push
+  328  ltr
+  329  ls
+  330  cat Pipfile
+  331  pipenv
+  332  pipenv uninstall pydocsty
+  333  git status
+  334  git difftool
+  335  pwd
+  336  python webotron/webotron.py list-bucket
+  337  python webotron/webotron.py list-bucket
+  338  python webotron/webotron.py list-bucket
+  339  pipenv shall
+  340  pipenv shell
+  341   . /Users/iberger/.local/share/virtualenvs/automating-aws-with-python-tKid7KGF/bin/activate
+  342  pwd
+  343  ls
+  344  cd 01-webotron/
+  345  python webotron/webotron.py 
+  346  exit
+  347   . /Users/iberger/.local/share/virtualenvs/01-webotron-sfzOz_tf/bin/activate
+  348  python webotron/webotron.py 
+  349  python webotron/webotron.py 
+  350  python webotron/webotron.py list-buckets
+  351  python webotron/webotron.py list-buckets
+  352  python webotron/webotron.py list-objects automatingawsilanberger-console'
+  353  "
+  354  w
+  355  python webotron/webotron.py list-objects automatingawsilanberger-console
+  356  python webotron/webotron.py list-bucket-objects automatingawsilanberger-console
+  357  python webotron/webotron.py list-bucket-objects automatingawsilanberger-boto3
+  358  python webotron/webotron.py --help
+  359  python webotron/webotron.py --help
+  360  python webotron/webotron.py list-buckets
+  361  python webotron/webotron.py list-bucket-objects automatingawsilanberger-boto3
+  362  python webotron/webotron.py setup-bucket automatingawsilanberger-boto3
+  363  python webotron/webotron.py setup-bucket automatingawsilanberger-boto3
+  364  python webotron/webotron.py setup-bucket automatingawsilanberger-boto3
+  365  python webotron/webotron.py setup-bucket automatingawsilanberger-boto3_new
+  366  python webotron/webotron.py setup-bucket automatingawsilanberger-boto3new
+  367  python webotron/webotron.py sync kitten_web/ automatingawsilanberger-boto3new
+  368  python webotron/webotron.py sync kitten_web/ automatingawsilanberger-boto3new
+  369  pycodestylr webotron/
+  370  pycodestyle webotron/
+  371  clear;pycodestyle webotron/
+  372  clear;pycodestyle webotron/
+  373  clear;pycodestyle webotron/
+  374  clear;pycodestyle webotron/
+  375  clear;pycodestyle webotron/
+  376  clear;pydocstyle webotron/
+  377  clear;pydocstyle webotron/
+  378  clear;pydocstyle webotron/
+  379  clear;pydocstyle webotron/
+  380  clear;pydocstyle webotron/
+  381  git status
+  382  git commit -am "Refactor the code"
+  383  git push
+  384  git status
+  385  git add .
+  386  git commit -m "add missing file"
+  387  git push
+  388  atom .
+  389  ls
+  390  pipenv shell
+  391  ls
+  392  cd 01-webotron/
+  393  pipenv
+  394  pipenv shell
+  395  history > x

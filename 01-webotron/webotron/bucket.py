@@ -132,7 +132,7 @@ class BucketManager:
             hash = self.hash_data(reduce(lambda x, y: x + y, (h.digest() for h in hashes)))
             return '"{}-{}"'.format(hash.hexdigest(), len(hashes))
 
-    def upload_file(self,bucket, path, key):
+    def upload_file(self, bucket, path, key):
         """Upload path toS_3 bucket at key."""
         content_type = mimetypes.guess_type(key)[0] or 'text/plain'
 
