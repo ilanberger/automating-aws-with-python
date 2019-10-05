@@ -1,4 +1,6 @@
-print("ilan")
+#!/user/bin/python
+
+from Ribit import *
 def PMT(presetValue,rate,time_in_years):
     time_in_months=time_in_years*12.0
     rate_month=rate*1.0/12/100
@@ -13,7 +15,7 @@ def calcMaskanta(presetValue,rate,time_in_years,madad,printinfo=False):
     time_in_months=time_in_years*12.0
     rate_month=rate*1.0/12/100
     madam_month=madad*1.0/12/100
-    monthlyPay=[]
+    monthReturn_list=[]
     Keren_total=presetValue
     Rebit=0
     Keren_return=0
@@ -37,12 +39,39 @@ def calcMaskanta(presetValue,rate,time_in_years,madad,printinfo=False):
 
         Sum_Rebit+=Rebit
         Sum_Total+=monthReturn
-        monthReturn_list.append[monthReturn]
+        monthReturn_list.append(monthReturn)
 
         Keren_total=Keren_total-Keren_return
 
     return Sum_Rebit,Sum_Total,monthReturn_list
 
+class Maskanta:
+    """Maskanta class."""
+
+    def __init__(self,Name,presetValue,rate,time_in_years,madad):
+        """Create a Maskanta objet."""
+        self.Name = Name
+        self.presetValue = presetValue
+        self.rate = rate
+        self.time_in_years = time_in_years
+        self.madad = madad
+
+        Sum_Rebit,Sum_Total,monthReturn_list = calcMaskanta(self.presetValue,self.rate,self.time_in_years,self.madad,False)
+        self.Sum_Rebit = Sum_Rebit
+        self.Sum_Total = Sum_Total
+        self.monthReturn_list = monthReturn_list
+    def PrintSummary(self):
+        print("\nMaskanta  {} {}\nRate = {}\nMadad = {}\nTime = {}".format(self.Name, self.presetValue ,self.rate ,self.madad ,self.time_in_years))
+        print("Total pay {:8.0f}  ({:8.0f} rebit)".format(self.Sum_Total,self.Sum_Rebit))
+
+    def PrintTable(self):
+        calcMaskanta(self.presetValue,self.rate,self.time_in_years,self.madad,True)
+
+    def GetTotalPay(self):
+        return self.Sum_Total
+
+    def GetMonthlyPay(self):
+        return self.monthReturn_list
 
 presetValue=800000
 rate  = 2 # in % ,2 percent
@@ -50,6 +79,13 @@ madad = 1 # in % ,1 percent
 time_in_years=10
 
 #print(PMT(presetValue,rate,time_in_years))
-print("Maskanta {}\nrate = {}\nMadad = {}\ntime".format(presetValue,rate,madad,time_in_years))
-Sum_Rebit,Sum_Total,monthReturn_list = calcMaskanta(presetValue,rate,time_in_years,madad,True)
-print("Total pay {}  ({} rebit)".format(Sum_Total,Sum_Rebit))
+
+#Sum_Rebit,Sum_Total,monthReturn_list = calcMaskanta(presetValue,rate,time_in_years,madad,True)
+#print("\nMaskanta {}\nRate = {}\nMadad = {}\nTime = {}".format(presetValue,rate,madad,time_in_years))
+#print("Total pay {:8.0f}  ({:8.0f} rebit)".format(Sum_Total,Sum_Rebit))
+
+#MyMaskanta=Maskanta("my first maskanta",presetValue,rate,time_in_years,madad)
+#MyMaskanta.PrintTable()
+#MyMaskanta.PrintSummary()
+print(GetRIBIT("PRIEM",10,"low"))
+print(GetRIBIT("KVOA_LO_TZAMOD",30,"high"))
