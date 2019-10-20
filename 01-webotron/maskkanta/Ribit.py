@@ -1,19 +1,35 @@
 #!/user/bin/python
 #Ribit types
-#PRIEM
-#KVOA_LO_TZAMOD
-#METANA_TZMODA
+#PRIME
+#KLZ KVOA LO TZVODA
+#KZ  KVOA    TZVODA
+#MLZ MESTANA LO TZVODA
+#MZ  MESTANA    TZVODA
 
 value={}
-value["PRIEM"]={}
-value["KVOA_LO_TZAMOD"]={}
-value["METANA_TZMODA"]={}
-value["PRIEM"]["high"]         = [1.75 , 1.75 ,  1.75 ,1.75  , 1.75]
-value["PRIEM"]["low"]          = [0.95 , 0.95  , 0.95 ,0.95  , 1.75]
-value["KVOA_LO_TZAMOD"]["high"]= [3.25 , 3.75  , 4.25 , 4.75 , 5  ]
-value["KVOA_LO_TZAMOD"]["low"] = [2.5  , 3.00  , 3.75 , 4.00 , 4.5]
-value["METANA_TZMODA"]["high"] = [3.4  , 3.4   , 3.4  , 3.4  , 3.4  ]
-value["METANA_TZMODA"]["low"]  = [2.75 , 2.75  , 2.75 , 2.75 , 2.75]
+value["PRIME"]={}
+value["KZ"]={}
+value["KLZ"]={}
+
+value["MLZ"]={}
+value["MZ"]={}
+
+value["PRIME"]["high"]         = [1.75 , 1.75 ,  1.75 ,1.75  , 1.75]
+value["PRIME"]["low"]          = [0.95 , 0.95  , 0.95 ,0.95  , 1.75]
+
+value["KLZ"]["high"]= [3.25 , 3.75  , 4.25 , 4.75 , 5  ]
+#value["KLZ"]["low"] = [2.5  , 3.00  , 3.75 , 4.00 , 4.5]
+value["KLZ"]["low"] = [2 , 2  , 2,2 ,2]
+
+value["KZ"]["high"] = [3  , 3   , 3.5  , 4  , 4  ]
+value["KZ"]["low"]  = [1  , 1   , 1    , 2  , 2  ]
+
+
+value["MLZ"]["high"] = [3.5  , 3.5   , 3.5  , 3.5  , 3.5  ]
+value["MLZ"]["low"]  = [2.5 , 2.5  , 2.5 , 2.5 , 2.5]
+
+value["MZ"]["high"] = [3.4  , 3.4   , 3.4  , 3.4  , 3.4  ]
+value["MZ"]["low"]  = [2.75 , 2.75  , 2.75 , 2.75 , 2.75]
 
 def GetRIBIT(RIBIT_Type,time,limit):
     list_place=-1
@@ -32,6 +48,56 @@ def GetRIBIT(RIBIT_Type,time,limit):
     if not(limit in value[RIBIT_Type].keys()):
         return -1
     return value[RIBIT_Type][limit][list_place]
+
+class CRIBIT:
+    def __init__(self,RIBIT_Type,time_in_years,limit):
+        """Create a RIBIT objet."""
+        self.RIBIT_Type = RIBIT_Type
+        self.time_in_years = time_in_years
+        self.limit = limit
+        self.MakeRIBITList()
+
+        #self.MADAM=MADAD
+    def GetRIBITinYear(self,YearOfMASKANTA=0):
+        if(self.RIBIT_Type in ["KZ","KLZ"]):
+            return GetRIBIT(self.RIBIT_Type,self.time_in_years ,self.limit)
+        else:
+            RIBIT= GetRIBIT(self.RIBIT_Type,self.time_in_years ,self.limit)
+            #RIMIT_change_from_delta=self.MADAM.GetChange(time)
+            RIMIT_change_from_delta=(0.5)*int(YearOfMASKANTA/5)
+            return RIBIT+RIMIT_change_from_delta
+
+    def MakeRIBITList(self):
+        RIBIT_list=[]
+        RIBIT_list_year=[]
+        if(self.RIBIT_Type in ["KZ","KLZ"]):
+            RIBIT_year=self.GetRIBITinYear()
+            RIBIT_list = [RIBIT_year/12]*12*self.time_in_years
+            RIBIT_list_year = [RIBIT_year]*self.time_in_years
+        else:
+            for year in range(self.time_in_years):
+                RIBIT_year=self.GetRIBITinYear(year)
+                RIBIT_list_year.append(RIBIT_year)
+                for month in range(1,13):
+                    RIBIT_list.append(RIBIT_year/12)
+        self.RIBIT_list=RIBIT_list
+        self.RIBIT_list_year=RIBIT_list_year
+    def GetRIBIT(self,year=False):
+        if(year):
+            return self.RIBIT_list_year
+        return self.RIBIT_list
+    def PrintRBITData(self):
+        print("RIBIT_Type = {}".format(self.RIBIT_Type))
+        print("Time_in_years = {}".format(self.time_in_years))
+        print("Limit = {}".format(self.limit))
+        print("Value is years {} {}".format(len(self.GetRIBIT(True)),self.GetRIBIT(True)))
+        #print("Value is month {} {}".format(len(self.GetRIBIT(False)),self.GetRIBIT(False)))
+
+
+
+
+
+
 
 class CMADAD:
     """MADAD class."""
