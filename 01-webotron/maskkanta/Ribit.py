@@ -32,3 +32,19 @@ def GetRIBIT(RIBIT_Type,time,limit):
     if not(limit in value[RIBIT_Type].keys()):
         return -1
     return value[RIBIT_Type][limit][list_place]
+
+class CMADAD:
+    """MADAD class."""
+
+    def __init__(self,madad_number):
+        """Create a MADA objet."""
+        self._vlaues=[madad_number/12]*(12*30)
+        self._vlauesyear=[madad_number]*(30)
+    def GetMadad(self,month):
+        return self._vlaues[month]
+
+    def GetMadad_list(self):
+        return self._vlaues
+    def GetMadad_print(self):
+        str_="constent of %{} per year".format(self._vlauesyear[0])
+        return str_
