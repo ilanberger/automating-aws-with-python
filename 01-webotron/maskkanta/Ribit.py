@@ -50,20 +50,19 @@ def GetRIBIT(RIBIT_Type,time,limit):
     return value[RIBIT_Type][limit][list_place]
 
 class CRIBIT:
-    def __init__(self,RIBIT_Type,time_in_years,limit):
+    def __init__(self,RIBIT_Type,time_in_years,limit,overrideValue=None):
         """Create a RIBIT objet."""
         self.RIBIT_Type = RIBIT_Type
         self.time_in_years = time_in_years
         self.limit = limit
+        self.overrideValue = overrideValue
         self.MakeRIBITList()
 
-        #self.MADAM=MADAD
     def GetRIBITinYear(self,YearOfMASKANTA=0):
         if(self.RIBIT_Type in ["KZ","KLZ"]):
             return GetRIBIT(self.RIBIT_Type,self.time_in_years ,self.limit)
         else:
             RIBIT= GetRIBIT(self.RIBIT_Type,self.time_in_years ,self.limit)
-            #RIMIT_change_from_delta=self.MADAM.GetChange(time)
             RIMIT_change_from_delta=(0.5)*int(YearOfMASKANTA/5)
             return RIBIT+RIMIT_change_from_delta
 
@@ -71,7 +70,8 @@ class CRIBIT:
         RIBIT_list=[]
         RIBIT_list_year=[]
         if(self.RIBIT_Type in ["KZ","KLZ"]):
-            RIBIT_year=self.GetRIBITinYear()
+            RIBIT_year = self.GetRIBITinYear() if (self.overrideValue==None) else self.overrideValue
+
             RIBIT_list = [RIBIT_year/12]*12*self.time_in_years
             RIBIT_list_year = [RIBIT_year]*self.time_in_years
         else:
@@ -95,10 +95,6 @@ class CRIBIT:
 
 
 
-
-
-
-
 class CMADAD:
     """MADAD class."""
 
@@ -113,4 +109,4 @@ class CMADAD:
         return self._vlaues
     def GetMadad_print(self):
         str_="constent of %{} per year".format(self._vlauesyear[0])
-        return str_
+        print(str_)
