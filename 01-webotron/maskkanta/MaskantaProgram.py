@@ -68,7 +68,10 @@ class MaskantaProgram:
     def PrintSummary(self):
         print("\nMaskanta  {} {:,}\nTime = {}".format(self.Name, self.presetValue ,self.time_in_years))
         print("Total pay {:,}  ({:,} rebit {:,} MADAD )".format(round(self.Sum_Total),round(self.Sum_Rebit),round(self.Sum_Total-self.Sum_Rebit-self.presetValue)))
-        self.madad.GetMadad_print()
+        if(self.rate.UseMadad()==True):
+            self.madad.GetMadad_print()
+        else:
+            print("No Madad used")
         print("\nRIBITS")
         self.rate.PrintRBITData()
 

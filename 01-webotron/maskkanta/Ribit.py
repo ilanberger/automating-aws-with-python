@@ -91,6 +91,7 @@ class CRIBIT:
         print("Time_in_years = {}".format(self.time_in_years))
         print("Limit = {}".format(self.limit))
         print("Value is years {} {}".format(len(self.GetRIBIT(True)),self.GetRIBIT(True)))
+
         #print("Value is month {} {}".format(len(self.GetRIBIT(False)),self.GetRIBIT(False)))
     def GetRIBIT_Type(self):
         return self.RIBIT_Type
@@ -118,5 +119,5 @@ class CMADAD:
     def GetMadad_list(self):
         return self._vlaues
     def GetMadad_print(self):
-        str_="constent of %{} per year".format(self._vlauesyear[0])
+        str_="Madad\nconstent of %{} per year\n".format(self._vlauesyear[0])
         print(str_)
