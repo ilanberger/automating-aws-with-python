@@ -92,6 +92,16 @@ class CRIBIT:
         print("Limit = {}".format(self.limit))
         print("Value is years {} {}".format(len(self.GetRIBIT(True)),self.GetRIBIT(True)))
         #print("Value is month {} {}".format(len(self.GetRIBIT(False)),self.GetRIBIT(False)))
+    def GetRIBIT_Type(self):
+        return self.RIBIT_Type
+    def GetRIBIT_limit(self):
+        return self.limit
+    def UseMadad(self):
+        if(self.RIBIT_Type in ["MLZ","KLZ"]):
+            print("not using madad")
+            return False
+        return True
+
 
 
 

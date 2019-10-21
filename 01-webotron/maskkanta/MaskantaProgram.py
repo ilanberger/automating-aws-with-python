@@ -24,7 +24,10 @@ def calcMaskantaProgram(presetValue,rate,time_in_years,madad,printinfo=False):
     Sum_Rebit=0
     Sum_Total=0
 
-    madam_month_list = madad.GetMadad_list()
+    if(rate.UseMadad()==True):
+        madam_month_list = madad.GetMadad_list()
+    else:
+        madam_month_list =[0]*int(time_in_months)
     #rate_month_list  = [0.1666]*int(time_in_months)
     rate_month_list  = rate.GetRIBIT()
 
@@ -77,7 +80,19 @@ class MaskantaProgram:
 
     def GetMonthlyPay(self):
         return self.monthReturn_list
+    def GetMonthReturn(self,month):
+        if(month<=len(self.monthReturn_list)):
+            return self.monthReturn_list[month-1]
+        return 0
+    def GetRIBIT_Type(self):
+        return self.rate.GetRIBIT_Type()
 
+    def GetRIBIT_limit(self):
+        return self.rate.GetRIBIT_limit()
+    def GetName(self):
+        return self.Name
+    def GetTotalTime(self):
+        return self.time_in_years
 presetValue=800000
 
 madad = 1# in % ,1 percent
@@ -93,5 +108,7 @@ MADAD=CMADAD(madad)
 
 if __name__ == "__main__":
     MyMaskantaProgram=MaskantaProgram("my first MaskantaProgram",presetValue,ribit_kovoa,time_in_years,MADAD)
-    #MyMaskantaProgram.PrintTable()
+
+    MyMaskantaProgram.PrintTable()
     MyMaskantaProgram.PrintSummary()
+    print(MyMaskantaProgram.GetMonthReturn(360))
