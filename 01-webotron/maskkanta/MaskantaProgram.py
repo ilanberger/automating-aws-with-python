@@ -52,19 +52,30 @@ def calcMaskantaProgram(presetValue,rate,time_in_years,madad,printinfo=False):
 class MaskantaProgram:
     """MaskantaProgram class."""
 
-    def __init__(self,Name,presetValue,RIBIT,time_in_years,madad):
+    def __init__(self,Name,presetValue,Pecent,RIBIT,time_in_years,madad,printData=False):
         """Create a MaskantaProgram objet."""
         self.Name = Name
-        self.presetValue = presetValue
+
 
         self.time_in_years = time_in_years
         self.madad = madad
         self.rate = RIBIT
+        self.printdata = printData
 
-        Sum_Rebit,Sum_Total,monthReturn_list = calcMaskantaProgram(self.presetValue,self.rate,self.time_in_years,self.madad,False)
+        self.dataValid = True
+        self.Pecent = Pecent
+        self.TotalpresetValue = presetValue
+        self.presetValue = presetValue * self.Pecent
+        self.calcProgram()
+
+
+
+    def calcProgram(self):
+        Sum_Rebit,Sum_Total,monthReturn_list = calcMaskantaProgram(self.presetValue,self.rate,self.time_in_years,self.madad,self.printdata)
         self.Sum_Rebit = Sum_Rebit
         self.Sum_Total = Sum_Total
         self.monthReturn_list = monthReturn_list
+
     def PrintSummary(self):
         print("\nMaskanta  {} {:,}\nTime = {}".format(self.Name, self.presetValue ,self.time_in_years))
         print("Total pay {:,}  ({:,} rebit {:,} MADAD )".format(round(self.Sum_Total),round(self.Sum_Rebit),round(self.Sum_Total-self.Sum_Rebit-self.presetValue)))
@@ -96,6 +107,24 @@ class MaskantaProgram:
         return self.Name
     def GetTotalTime(self):
         return self.time_in_years
+
+    def SetTotalTime(self,time):
+        self.time_in_years = time
+        self.dataValid = False
+
+    def GetPecent(self):
+        return self.Pecent
+
+    def SetPecent(self,Pecent):
+        self.Pecent = Pecent
+        self.dataValid = False
+
+    def recalcProgram(self):
+        self.calcProgram()
+        self.dataValid = True
+    def isDataValid(self):
+        return self.dataValid
+
 presetValue=800000
 
 madad = 1# in % ,1 percent

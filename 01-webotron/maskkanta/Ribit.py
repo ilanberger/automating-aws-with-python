@@ -91,6 +91,8 @@ class CRIBIT:
         print("Time_in_years = {}".format(self.time_in_years))
         print("Limit = {}".format(self.limit))
         print("Value is years {} {}".format(len(self.GetRIBIT(True)),self.GetRIBIT(True)))
+        if(self.RIBIT_Type in ["MLZ","KLZ"]):
+            print("not using madad")
 
         #print("Value is month {} {}".format(len(self.GetRIBIT(False)),self.GetRIBIT(False)))
     def GetRIBIT_Type(self):
@@ -99,7 +101,6 @@ class CRIBIT:
         return self.limit
     def UseMadad(self):
         if(self.RIBIT_Type in ["MLZ","KLZ"]):
-            print("not using madad")
             return False
         return True
 

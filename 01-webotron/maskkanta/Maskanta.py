@@ -9,13 +9,24 @@ class Maskanta:
         self.presetValue= presetValue
         self._programs=[]
         self.addMadad(0)
-        self._maxyears=0
+
         self._paymentreturns=[]
+
+
+        self.checkLimitvalis()
+
+        self.isMaskantaDataValid = False
+        self.initreurnvaluse()
+
+    def initreurnvaluse(self):
+        self._maxyears=0
         self._maxpayment=0
         self._TotalAmont=0
-        self.checkLimitvalis()
         self.TotalPecent=0
 
+
+    def isMaskantaDataValid(self):
+        return self.isMaskantaDataValid
     def checkLimitvalis(self):
         if not ( self.limit in ["high","low"]):
             print("{} not a valide RIBIT Limit".format(self.limit))
@@ -28,16 +39,15 @@ class Maskanta:
     def addMadad(self,Madad):
         self.MADAD=CMADAD(Madad)
 
-    def AddProgram(self,RIBIT_Type,Pecent,time_in_years,ribit=None):
-        self._maxyears = max(self._maxyears,time_in_years)
-        self.TotalPecent += Pecent
+    def AddProgram(self,RIBIT_Type,Pecent,time_in_years,ribit=None,printData=False):
+
 
         ribitClass=CRIBIT(RIBIT_Type,time_in_years,self.limit,ribit)
         self._programs.append(
-            MaskantaProgram(RIBIT_Type,self.presetValue*Pecent,ribitClass,time_in_years,self.MADAD)
+            MaskantaProgram(RIBIT_Type,self.presetValue,Pecent,ribitClass,time_in_years,self.MADAD,printData)
         )
     def checkallvaluesvalid(self):
-        print(self.TotalPecent )
+        #print("total part of maskanta {}".format(self.TotalPecent) )
         if (self.TotalPecent !=1):
             print("didn't get 100% of Prgrams (got {}%])".format(self.TotalPecent ))
             return False
@@ -49,12 +59,22 @@ class Maskanta:
 
         return True
 
-    def calc(self,printTable=True):
-        #todo make sure all pescent add to PV
+    def calc(self,printSummary=False,printTable=False):
+        self.initreurnvaluse()
+        #checl all prgram data are valide ( valuse may change and need to recalc them)
+        for program in self._programs:
+            if(program.isDataValid()==False):
+                program.recalcProgram()
+            self._maxyears = max(self._maxyears,program.GetTotalTime())
+            self.TotalPecent += program.GetPecent()
+
+        # check all programs get to 100%
         if(self.checkallvaluesvalid()==False):
             return -1
-        for program in self._programs:
-            program.PrintSummary()
+
+        if(printSummary):
+            for program in self._programs:
+                program.PrintSummary()
 
         tempstr="{0:<8}".format("")
         for program in self._programs:
@@ -78,12 +98,22 @@ class Maskanta:
             if(printTable):
                 print(tempstr)
         self._maxpayment=max(self._paymentreturns)
+        self.isMaskantaDataValid = True
+
+    def print(self):
+        for program in self._programs:
+            print("{:<6} ({})".format(program.GetName(),program.GetTotalTime()))
 
     def printSummary(self):
         print("PV {:,}\nTotal return {:,}".format(self.presetValue,int(self._TotalAmont)))
         for program in self._programs:
             print("\t{:<6}  {:,}nis ({})".format(program.GetName(),int(program.GetTotalPay()),program.GetTotalTime()))
         print("max return {}\nMax years {}".format(int(self._maxpayment),self._maxyears))
+
+    def changeTime(self,programN,delta_time):
+        program = self._programs[programN]
+        orignaltime = program.GetTotalTime()
+        program.SetTotalTime(orignaltime+delta_time)
 
 
 
