@@ -31,6 +31,8 @@ value["MLZ"]["low"]  = [2.5 , 2.5  , 2.5 , 2.5 , 2.5]
 value["MZ"]["high"] = [3.4  , 3.4   , 3.4  , 3.4  , 3.4  ]
 value["MZ"]["low"]  = [2.75 , 2.75  , 2.75 , 2.75 , 2.75]
 
+fiveyearexpectedchange=[0,0.5,1,1.5,2,2.5,3]
+
 def GetRIBIT(RIBIT_Type,time,limit):
     list_place=-1
     if(time<11):
@@ -53,18 +55,30 @@ class CRIBIT:
     def __init__(self,RIBIT_Type,time_in_years,limit,overrideValue=None):
         """Create a RIBIT objet."""
         self.RIBIT_Type = RIBIT_Type
-        self.time_in_years = time_in_years
+
         self.limit = limit
         self.overrideValue = overrideValue
+        #self.MakeRIBITList()
+        self.time_in_years = time_in_years # this should be removed
+        #self.MakeRIBITList()
+        self.RIBIT_list=[]
+        self.RIBIT_list_year=[]
+    def GetRIBITbyyear(self):
+        return self.RIBIT_list_year
+    def SetTimeInyears(self,time_in_years):
+        self.time_in_years = time_in_years
         self.MakeRIBITList()
+
 
     def GetRIBITinYear(self,YearOfMASKANTA=0):
         if(self.RIBIT_Type in ["KZ","KLZ"]):
             return GetRIBIT(self.RIBIT_Type,self.time_in_years ,self.limit)
+        elif(self.RIBIT_Type in ["PRIME"]):#need to do better prime estmation
+            return GetRIBIT(self.RIBIT_Type,self.time_in_years ,self.limit)
         else:
-            RIBIT= GetRIBIT(self.RIBIT_Type,self.time_in_years ,self.limit)
-            RIMIT_change_from_delta=(0.5)*int(YearOfMASKANTA/5)
-            return RIBIT+RIMIT_change_from_delta
+            RIBIT_ogen= GetRIBIT(self.RIBIT_Type,self.time_in_years ,self.limit)
+            fiveyearN=int(YearOfMASKANTA/5)
+            return RIBIT_ogen+fiveyearexpectedchange[fiveyearN]
 
     def MakeRIBITList(self):
         RIBIT_list=[]

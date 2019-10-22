@@ -29,6 +29,7 @@ def calcMaskantaProgram(presetValue,rate,time_in_years,madad,printinfo=False):
     else:
         madam_month_list =[0]*int(time_in_months)
     #rate_month_list  = [0.1666]*int(time_in_months)
+    rate.SetTimeInyears(time_in_years)
     rate_month_list  = rate.GetRIBIT()
 
     for month in range(1,int(time_in_months+1)):
@@ -103,6 +104,8 @@ class MaskantaProgram:
 
     def GetRIBIT_limit(self):
         return self.rate.GetRIBIT_limit()
+    def GetRIBIT_byyear(self):
+        return self.rate.GetRIBITbyyear()
     def GetName(self):
         return self.Name
     def GetTotalTime(self):

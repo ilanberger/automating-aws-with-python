@@ -35,7 +35,7 @@ if __name__ == "__main__":
     MyMaskanta.calc(printSummary=False,printTable=False)
     creature=MaskantaChild(1,"aaa",MyMaskanta)
     creature.printinfo()
-    creature.ChangeTime()
+    creature.ChangeTime(programN=1,time=1)
     creature.printinfo()
 
     #MyMaskanta.printSummary()
