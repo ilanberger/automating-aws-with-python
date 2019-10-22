@@ -29,8 +29,8 @@ if __name__ == "__main__":
 
     MyMaskanta=Maskanta("low",800000)
     MyMaskanta.addMadad(1)
-    MyMaskanta.AddProgram("MZ",1/3,10)
     MyMaskanta.AddProgram("PRIME",1/3,30)
+    MyMaskanta.AddProgram("MZ",1/3,10)
     MyMaskanta.AddProgram("KLZ",1/3,20,6)
     MyMaskanta.calc(printSummary=False,printTable=False)
     creature=MaskantaChild(1,"aaa",MyMaskanta)

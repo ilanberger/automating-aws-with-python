@@ -105,10 +105,10 @@ class Maskanta:
             print("{:<6} ({})".format(program.GetName(),program.GetTotalTime()))
 
     def printSummary(self):
-        print("PV {:,}\nTotal return {:,}".format(self.presetValue,int(self._TotalAmont)))
+        print("PV {:,}\nTotal return {:,} max return {}\nMax years {}".format(self.presetValue,int(self._TotalAmont),int(self._maxpayment),self._maxyears))
         for program in self._programs:
-            print("\t{:<6}  {:,}nis ({})".format(program.GetName(),int(program.GetTotalPay()),program.GetTotalTime()))
-        print("max return {}\nMax years {}".format(int(self._maxpayment),self._maxyears))
+            print("\t{:<6}  {:,}nis ({}) ({:0.3}%)".format(program.GetName(),int(program.GetTotalPay()),program.GetTotalTime(),program.GetPecent()*100))
+        #print("max return {}\nMax years {}".format(int(self._maxpayment),self._maxyears))
 
     def changeTime(self,programN,delta_time):
         program = self._programs[programN]
