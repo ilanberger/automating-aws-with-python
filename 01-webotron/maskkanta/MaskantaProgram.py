@@ -128,20 +128,23 @@ class MaskantaProgram:
     def isDataValid(self):
         return self.dataValid
 
-presetValue=800000
-
-madad = 1# in % ,1 percent
 
 
-RIBIT_Type="MZ"
-time_in_years=30
-limit="low"
-ribit_kovoa=CRIBIT(RIBIT_Type,time_in_years,limit)
-#ribit_kovoa.PrintRBITData()
 
-MADAD=CMADAD(madad)
+
 
 if __name__ == "__main__":
+    presetValue=800000
+
+    madad = 1# in % ,1 percent
+    RIBIT_Type="MZ"
+    time_in_years=30
+    limit="low"
+    ribit_kovoa=CRIBIT(RIBIT_Type,time_in_years,limit)
+    #ribit_kovoa.PrintRBITData()
+
+    MADAD=CMADAD(madad)
+
     MyMaskantaProgram=MaskantaProgram("my first MaskantaProgram",presetValue,ribit_kovoa,time_in_years,MADAD)
 
     MyMaskantaProgram.PrintTable()

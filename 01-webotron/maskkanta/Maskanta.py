@@ -10,7 +10,7 @@ class Maskanta:
         self._programs=[]
         self.addMadad(0)
 
-        self._paymentreturns=[]
+
 
 
         self.checkLimitvalis()
@@ -21,8 +21,13 @@ class Maskanta:
     def initreurnvaluse(self):
         self._maxyears=0
         self._maxpayment=0
+        self._firstpayment=0
         self._TotalAmont=0
         self.TotalPecent=0
+        self._paymentreturns=[]
+
+    def Nprograms(self):
+        return len(self._programs)
 
 
     def isMaskantaDataValid(self):
@@ -36,8 +41,8 @@ class Maskanta:
         pass
     def GetmaxPayment(self):
         return self._maxpayment
-    def addMadad(self,Madad):
-        self.MADAD=CMADAD(Madad)
+    def addMadad(self,Madad,printMadad=True):
+        self.MADAD=CMADAD(Madad,printMadad)
 
     def AddProgram(self,RIBIT_Type,Pecent,time_in_years,ribit=None,printData=False):
 
@@ -97,23 +102,42 @@ class Maskanta:
             tempstr+="  |  {:8.0f} ".format(monthsum)
             if(printTable):
                 print(tempstr)
+        self._firstpayment=self._paymentreturns[0]
         self._maxpayment=max(self._paymentreturns)
         self.isMaskantaDataValid = True
 
     def print(self):
         for program in self._programs:
-            print("{:<6} ({})".format(program.GetName(),program.GetTotalTime()))
+            print("\t{:<6}  {:,}nis ({}) ({:0.3}%)".format(program.GetName(),int(program.GetTotalPay()),program.GetTotalTime(),program.GetPecent()*100))
 
-    def printSummary(self):
-        print("PV {:,}\nTotal return {:,} max return {}\nMax years {}".format(self.presetValue,int(self._TotalAmont),int(self._maxpayment),self._maxyears))
+    def printSummary(self,printlevel):
+        if(printlevel>=2):
+            print("\tPV {:,} Total return {:,} first payment = {} max return = {} Maxyears {}".format(self.presetValue,int(self._TotalAmont),int(self._firstpayment),int(self._maxpayment),self._maxyears))
         for program in self._programs:
-            print("\t{:<6}  {:,}nis ({}) ({:0.3}%) {}".format(program.GetName(),int(program.GetTotalPay()),program.GetTotalTime(),program.GetPecent()*100,program.GetRIBIT_byyear()))
+            if(printlevel == 3):
+                print("\t  {:<6}  {:,}nis ({}) ({:0.3}%)".format(program.GetName(),int(program.GetTotalPay()),program.GetTotalTime(),program.GetPecent()*100))
+            elif(printlevel>3):
+                print("\t  {:<6}  {:,}nis ({}) ({:0.3}%) {}".format(program.GetName(),int(program.GetTotalPay()),program.GetTotalTime(),program.GetPecent()*100,program.GetRIBIT_byyear()))
         #print("max return {}\nMax years {}".format(int(self._maxpayment),self._maxyears))
+        if(printlevel>4):
+            self.calc(printSummary=False,printTable=True)
 
     def changeTime(self,programN,delta_time):
         program = self._programs[programN]
         orignaltime = program.GetTotalTime()
         program.SetTotalTime(orignaltime+delta_time)
+
+    def changePercent(self,firstprogramN,secondprogramN,randomRumber):
+        program1 = self._programs[firstprogramN]
+        program2 = self._programs[secondprogramN]
+        Pecent1  = program1.GetPecent()
+        Pecent2  = program2.GetPecent()
+        NewPercent1 = round(max(Pecent1*100+randomRumber,0))/100
+        NewPercent2 = round((Pecent1+Pecent2-NewPercent1)*100)/100
+        program1.SetPecent(NewPercent1)
+        program2.SetPecent(NewPercent2)
+        #print("programs {} {} - old {} {}".format(firstprogramN,secondprogramN,Pecent1,Pecent2))
+        #print("                 new {} {}".format(NewPercent1,NewPercent2))
 
 
 

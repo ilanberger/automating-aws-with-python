@@ -124,10 +124,12 @@ class CRIBIT:
 class CMADAD:
     """MADAD class."""
 
-    def __init__(self,madad_number):
+    def __init__(self,madad_number,printMadad=False):
         """Create a MADA objet."""
         self._vlaues=[madad_number/12]*(12*30)
         self._vlauesyear=[madad_number]*(30)
+        if(printMadad):
+            self.GetMadad_print()
     def GetMadad(self,month):
         return self._vlaues[month]
 
