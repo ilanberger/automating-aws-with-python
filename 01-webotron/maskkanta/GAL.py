@@ -15,7 +15,12 @@ class MaskantaChild:
         self.Maskanta=copy.deepcopy(Maskanta)
 
     def ChangeTime(self,programN=2,time=-5):
-        self.Maskanta.changeTime(programN,time)
+        programsNumbers=list(range(1,self.Maskanta.Nprograms())) #started from 1 , 0 is prime no changeTime
+        randomselectedprogram=random.randint(0,len(programsNumbers)-1)
+        time = random.randint(-5,5)
+        randomselectedprogram=3
+        print("{} {}".format(randomselectedprogram,time))
+        self.Maskanta.changeTime(randomselectedprogram,time)
         self.isDataValid = False
 
     def addyear(self):
@@ -50,16 +55,17 @@ if __name__ == "__main__":
     MyMaskanta=Maskanta("low",800000)
     MyMaskanta.addMadad(1)
     MyMaskanta.AddProgram("PRIME",0.33,30)
-    MyMaskanta.AddProgram("MZ",0.33,10)
+    MyMaskanta.AddProgram("MZ",0.13,10)
     MyMaskanta.AddProgram("KLZ",0.20,20)
     MyMaskanta.AddProgram("KZ",0.14,20)
+    MyMaskanta.AddProgram("MZ",0.20,20)
     MyMaskanta.calc(printSummary=False,printTable=False)
     creature=MaskantaChild(1,"aaa",MyMaskanta)
     creature.printinfo()
-    creature.ChangeTime(programN=1,time=5)
-    creature.printinfo()
+    creature.ChangeTime()
+    creature.printinfo(printlevel=3)
     creature.ChangePercents()
-    creature.printinfo(printlevel=2)
+    creature.printinfo(printlevel=3)
 
     #MyMaskanta.printSummary()
     #MyMaskanta.PrintTable()

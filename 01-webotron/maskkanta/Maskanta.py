@@ -53,7 +53,7 @@ class Maskanta:
         )
     def checkallvaluesvalid(self):
         #print("total part of maskanta {}".format(self.TotalPecent) )
-        if (self.TotalPecent !=1):
+        if (abs(self.TotalPecent - 1))>0.001:
             print("didn't get 100% of Prgrams (got {}%])".format(self.TotalPecent ))
             return False
         for program in self._programs:
@@ -125,7 +125,11 @@ class Maskanta:
     def changeTime(self,programN,delta_time):
         program = self._programs[programN]
         orignaltime = program.GetTotalTime()
-        program.SetTotalTime(orignaltime+delta_time)
+        #time should be [10-30]
+        print("orignaltime {}".format(orignaltime))
+        newtime = int((orignaltime+delta_time-10)%30+10)
+        print("new time {} {}".format(newtime,delta_time))
+        program.SetTotalTime(newtime)
 
     def changePercent(self,firstprogramN,secondprogramN,randomRumber):
         program1 = self._programs[firstprogramN]

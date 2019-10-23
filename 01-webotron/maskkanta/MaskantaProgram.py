@@ -66,7 +66,7 @@ class MaskantaProgram:
         self.dataValid = True
         self.Pecent = Pecent
         self.TotalpresetValue = presetValue
-        self.presetValue = presetValue * self.Pecent
+        self.presetValue = self.TotalpresetValue  * self.Pecent
         self.calcProgram()
 
 
@@ -120,6 +120,7 @@ class MaskantaProgram:
 
     def SetPecent(self,Pecent):
         self.Pecent = Pecent
+        self.presetValue = self.TotalpresetValue  * self.Pecent
         self.dataValid = False
 
     def recalcProgram(self):
