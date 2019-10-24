@@ -12,6 +12,30 @@ class MaskantaGAL:
         self._ancestor = []
         self._childern=[]
         self._childernDic={}
+        self._childern_previousRun=[]
+        self._childernDic_previousRun={}
+
+    def setMaxPayment(self,maxpayment):
+        self._maxPaymentaloud = maxpayment
+
+    def savepreviousRun(self):
+        #self._childern_previousRun=copy.deepcopy(self._childern)
+        self._childernDic_previousRun=copy.deepcopy(self._childernDic)
+
+    def printGenerationImprovment(self):
+
+        Total = self._childernDic["TotalAmont"][0]
+        Total_before = self._childernDic_previousRun["TotalAmont"][0]
+
+        Max = self._childernDic["MaxPayment"][0]
+        Max_before = self._childernDic_previousRun["MaxPayment"][0]
+
+        first = self._childernDic["FirstPayment"][0]
+        firstbefore = self._childernDic_previousRun["FirstPayment"][0]
+
+        print("  Total Delta {}  ({} --> {})".format((Total_before-Total),Total_before,Total))
+        print("  MAX   Delta {}  ({} --> {})".format((Max_before-Max),Max_before,Max))
+        print("  First Delta {}  ({} --> {})".format((firstbefore-first),firstbefore,first))
 
     def addAncestor(self,ancestor):
         temp=copy.deepcopy(ancestor)
@@ -22,9 +46,17 @@ class MaskantaGAL:
         while(len(self._childern)<self.TotalChilds):
             temp = copy.deepcopy(self._ancestor[N%len(self._ancestor)])
             self._childern.append(temp)
+            N += 1
 
-        N += 1
-        print(self._childern)
+    def createChildern(self):
+        N=0
+        while(len(self._childern)<self.TotalChilds):
+            temp = copy.deepcopy(self._childern[N])
+            self._childern.append(temp)
+            N+=1
+        self.UpdateChildrenData()
+
+
 
     def UpdateChildrenData(self):
         count=0
@@ -34,6 +66,7 @@ class MaskantaGAL:
         for child in self._childern:
             child.Run()
             TotalAmont , MaxPayment , FirstPayment = child.GetMaskandaData()
+
             self._childernDic["TotalAmont"][count] = TotalAmont
             self._childernDic["MaxPayment"][count] = MaxPayment
             self._childernDic["FirstPayment"][count] = FirstPayment
@@ -43,12 +76,29 @@ class MaskantaGAL:
         self.initChildern()
         for cycle in range(self.TotalGenerations ):
             self.RunRandomChange()
-            self.UpdateChildrenData()
             print("Cycle - {}".format(cycle))
-            self.sortChildrenByMaxAmount()
-            print(self._childernDic["MaxPayment"])
+            self.sortChildrenByTotalAmont()
+            self.KillBadresults()
+            if(cycle>0):
+                self.printGenerationImprovment()
+            #print(self._childernDic["TotalAmont"])
+            #print(self._childernDic["MaxPayment"])
+    def KillBadresults(self):
+        newchildlist = []
+        n=0
+        for i in range(len(self._childernDic["MaxPayment"])):
+            if(self._childernDic["MaxPayment"][n]<self._maxPaymentaloud):
+                newchildlist.append(self._childern[n])
+            else:
+                print("child {} removed".format(n))
+            n+=1
+        self._childern = newchildlist
+        "some child were deleted need to doplecate others"
+        self.createChildern()
+
 
     def RunRandomChange(self):
+        self.savepreviousRun()
         childN=-1
         for child in self._childern:
             childN+=1
@@ -63,14 +113,15 @@ class MaskantaGAL:
             elif(randomselection==2):
                 child.ChangePercents()
                 child.ChangeTime()
+        self.UpdateChildrenData()
 
-    def sortChildrenByMaxAmount(self):
-        Y = self._childernDic["MaxPayment"]
+    def sortChildrenByTotalAmont(self):
+        Y = copy.copy(self._childernDic["TotalAmont"])
+
         X = self._childern
 
         newlist = copy.copy(Y)
         newlist.sort()
-        print(newlist)
         X = self._childern
         newchildernlist = []
         place=0
@@ -89,16 +140,11 @@ class MaskantaGAL:
         #print(self._childern)
         self.UpdateChildrenData()
 
+    def PrintSummary(self):
+        self._ancestor[0].printinfo(printlevel=3)
+        self._childern[0].printinfo(printlevel=3)
 
 
-        #self._childern  = [x for _,x in sorted(zip(Y,X))]
-        #self.UpdateChildrenData()
-
-
-#X = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
-#Y = [ 0,   1,   1,    0,   1,   2,   2,   0,   1]
-#Z = [x for _,x in sorted(zip(Y,X))]
-#print(Z)  # ["a", "d", "h", "b", "c", "e", "i", "f", "g"]
 
 
 
@@ -113,6 +159,8 @@ if __name__ == "__main__":
         MyMaskanta.AddProgram("MZ",0.20,20)
         MyMaskanta.calc()
         creature=MaskantaChild(1,"ancestor",MyMaskanta)
-        GAL=MaskantaGAL(2,10,3,PrintLevel=5)
+        GAL=MaskantaGAL(3,20,100,PrintLevel=5)
         GAL.addAncestor(creature)
+        GAL.setMaxPayment(5000)
         GAL.Run()
+        GAL.PrintSummary()

@@ -73,7 +73,12 @@ class Maskanta:
         #checl all prgram data are valide ( valuse may change and need to recalc them)
         for program in self._programs:
             if(program.isDataValid()==False):
-                program.recalcProgram()
+                try:
+                    program.recalcProgram()
+                except:
+                    print("****** error in prgram cal *******")
+                    program.PrintSummary()
+                    raise
             self._maxyears = max(self._maxyears,program.GetTotalTime())
             self.TotalPecent += program.GetPecent()
 
@@ -131,7 +136,7 @@ class Maskanta:
         orignaltime = program.GetTotalTime()
         #time should be [10-30]
         #print("orignaltime {}".format(orignaltime))
-        newtime = int((orignaltime+delta_time-10)%30+10)
+        newtime = int((orignaltime+delta_time-10)%20+10)
         #print("new time {} {}".format(newtime,delta_time))
         program.SetTotalTime(newtime)
 
