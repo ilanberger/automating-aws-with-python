@@ -25,7 +25,12 @@ class Maskanta:
         self._TotalAmont=0
         self.TotalPecent=0
         self._paymentreturns=[]
-
+    def GetTotalAmont(self):
+        return self._TotalAmont
+    def GetMaxPayment(self):
+        return self._maxpayment
+    def GetFirstPayment(self):
+        return self._firstpayment
     def Nprograms(self):
         return len(self._programs)
 
@@ -39,9 +44,8 @@ class Maskanta:
 
     def _checktotalsum():
         pass
-    def GetmaxPayment(self):
-        return self._maxpayment
-    def addMadad(self,Madad,printMadad=True):
+
+    def addMadad(self,Madad,printMadad=False):
         self.MADAD=CMADAD(Madad,printMadad)
 
     def AddProgram(self,RIBIT_Type,Pecent,time_in_years,ribit=None,printData=False):
@@ -126,9 +130,9 @@ class Maskanta:
         program = self._programs[programN]
         orignaltime = program.GetTotalTime()
         #time should be [10-30]
-        print("orignaltime {}".format(orignaltime))
+        #print("orignaltime {}".format(orignaltime))
         newtime = int((orignaltime+delta_time-10)%30+10)
-        print("new time {} {}".format(newtime,delta_time))
+        #print("new time {} {}".format(newtime,delta_time))
         program.SetTotalTime(newtime)
 
     def changePercent(self,firstprogramN,secondprogramN,randomRumber):

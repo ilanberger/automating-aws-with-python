@@ -15,17 +15,27 @@ class MaskantaChild:
         self.Maskanta=copy.deepcopy(Maskanta)
 
     def ChangeTime(self,programN=2,time=-5):
+        """
+        randomly select 1 program 1-totalamount (0 is used for prime - no change)
+        them randomly time to change on program
+        time select range (-5::5]) - time is mod by 30 so total time will be in range 10-30
+        """
         programsNumbers=list(range(1,self.Maskanta.Nprograms())) #started from 1 , 0 is prime no changeTime
         randomselectedprogram=random.randint(0,len(programsNumbers)-1)
         time = random.randint(-5,5)
         randomselectedprogram=3
-        print("{} {}".format(randomselectedprogram,time))
+        #print("{} {}".format(randomselectedprogram,time))
         self.Maskanta.changeTime(randomselectedprogram,time)
         self.isDataValid = False
 
     def addyear(self):
         self.age +=1
     def ChangePercents(self):
+        """
+        randomly select 2 program 1-total (0 is used for prime - no change)
+        them randomly select percent to move from program a to b
+        percent select range (-5::5])
+        """
         programsNumbers=list(range(1,self.Maskanta.Nprograms())) #started from 1 , 0 is prime no changeTime
         randomselectedprogram=random.randint(0,len(programsNumbers)-1)
         #print(programsNumbers,randomselectedprogram)
@@ -39,17 +49,27 @@ class MaskantaChild:
         self.isDataValid = False
 
 
-
-
-
-    def printinfo(self,printlevel=1):
+    def Run(self):
         if(self.isDataValid == False):
             self.Maskanta.calc() # calc will amke sure all data is valid
             self.isDataValid = True
             self.addyear()
+
+    def GetMaskandaData(self):
+        TotalAmont = round(self.Maskanta.GetTotalAmont())
+        MaxPayment = round(self.Maskanta.GetMaxPayment())
+        FirstPayment = round(self.Maskanta.GetFirstPayment())
+        return TotalAmont , MaxPayment , FirstPayment
+
+
+    def printinfo(self,printlevel=1):
+        if(self.isDataValid == False):
+            self.Run()
         print("serial {} age {}".format(self.serial,self.age))
         #self.Maskanta.print()
         self.Maskanta.printSummary(printlevel)
+
+
 if __name__ == "__main__":
 
     MyMaskanta=Maskanta("low",800000)
