@@ -159,7 +159,7 @@ if __name__ == "__main__":
         MyMaskanta.AddProgram("MZ",0.20,20)
         MyMaskanta.calc()
         creature=MaskantaChild(1,"ancestor",MyMaskanta)
-        GAL=MaskantaGAL(3,20,100,PrintLevel=5)
+        GAL=MaskantaGAL(10,100,100,PrintLevel=5)
         GAL.addAncestor(creature)
         GAL.setMaxPayment(5000)
         GAL.Run()

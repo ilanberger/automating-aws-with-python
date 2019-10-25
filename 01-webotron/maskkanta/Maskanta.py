@@ -146,9 +146,17 @@ class Maskanta:
         Pecent1  = program1.GetPecent()
         Pecent2  = program2.GetPecent()
         NewPercent1 = round(max(Pecent1*100+randomRumber,0))/100
+        #if(NewPercent1>=(Pecent1+Pecent2)):# in for example 0.1 0 and rand naumber is 5 --> 0.15 -0.05
+        #    NewPercent1 = round(max(Pecent1*100-randomRumber,0))/100
         NewPercent2 = round((Pecent1+Pecent2-NewPercent1)*100)/100
+        if((NewPercent1<0)| (NewPercent2<0)):
+            return
         program1.SetPecent(NewPercent1)
         program2.SetPecent(NewPercent2)
+        if(NewPercent2*NewPercent1<0):
+            print("programs {} {} - old {} {}".format(firstprogramN,secondprogramN,Pecent1,Pecent2))
+            print("                 new {} {}".format(NewPercent1,NewPercent2))
+            raise
         #print("programs {} {} - old {} {}".format(firstprogramN,secondprogramN,Pecent1,Pecent2))
         #print("                 new {} {}".format(NewPercent1,NewPercent2))
 
