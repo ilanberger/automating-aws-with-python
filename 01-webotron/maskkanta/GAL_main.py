@@ -3,6 +3,8 @@ from GAL import *
 import copy
 import random
 
+
+
 class MaskantaGAL:
     def __init__(self,SaveNextGen,TotalChilds,TotalGenerations,PrintLevel):
         self.SaveNextGen = SaveNextGen
@@ -14,6 +16,7 @@ class MaskantaGAL:
         self._childernDic={}
         self._childern_previousRun=[]
         self._childernDic_previousRun={}
+        self.SerialNumber=0
 
     def setMaxPayment(self,maxpayment):
         self._maxPaymentaloud = maxpayment
@@ -42,17 +45,25 @@ class MaskantaGAL:
         self._ancestor.append(temp)
 
     def initChildern(self):
+        global SerialNumber
+
         N=0
         while(len(self._childern)<self.TotalChilds):
             temp = copy.deepcopy(self._ancestor[N%len(self._ancestor)])
             self._childern.append(temp)
+            self._childern[-1].SetSerial(self.SerialNumber)
+            self.SerialNumber += 1
             N += 1
 
     def createChildern(self):
+
         N=0
         while(len(self._childern)<self.TotalChilds):
             temp = copy.deepcopy(self._childern[N])
             self._childern.append(temp)
+            self._childern[-1].SetSerial(self.SerialNumber)
+            self.SerialNumber +=1
+
             N+=1
         self.UpdateChildrenData()
 
@@ -76,13 +87,21 @@ class MaskantaGAL:
         self.initChildern()
         for cycle in range(self.TotalGenerations ):
             self.RunRandomChange()
+            #self.printData()
             print("Cycle - {}".format(cycle))
             self.sortChildrenByTotalAmont()
             self.KillBadresults()
             if(cycle>0):
                 self.printGenerationImprovment()
+
             #print(self._childernDic["TotalAmont"])
             #print(self._childernDic["MaxPayment"])
+    def printData(self):
+        if(self.PrintLevel>0):
+            for nchild , child in enumerate(self._childern,start=0):
+                print(nchild),
+                child.printinfo(self.PrintLevel)
+
     def KillBadresults(self):
         newchildlist = []
         n=0
@@ -100,19 +119,32 @@ class MaskantaGAL:
     def RunRandomChange(self):
         self.savepreviousRun()
         childN=-1
-        for child in self._childern:
-            childN+=1
+        for childN , child in enumerate(self._childern,start=0):
+        #for child in self._childern:
+        #    childN+=1
+            self.Dprint("---- {} ------".format(childN),2)
             if(childN<self.SaveNextGen):
                 "leave stronge children"
+                child.printinfo(self.PrintLevel)
                 continue
-            randomselection = random.randint(0,2)
+            randomselection = random.randint(1,3)
             if(randomselection==1):
-                child.ChangeTime()
+                self.Dprint("Time changed",2)
+                child.ChangeTime(self.PrintLevel)
+
             elif(randomselection==2):
-                child.ChangePercents()
-            elif(randomselection==2):
-                child.ChangePercents()
-                child.ChangeTime()
+                self.Dprint("Percents changed",2)
+                child.ChangePercents(self.PrintLevel)
+
+            elif(randomselection==3):
+                self.Dprint("Time + Percents changed",2)
+                child.ChangePercents(self.PrintLevel)
+                child.ChangeTime(self.PrintLevel)
+
+            else :
+                print(randomselection)
+                raise
+            child.printinfo(self.PrintLevel)
         self.UpdateChildrenData()
 
     def sortChildrenByTotalAmont(self):
@@ -143,8 +175,11 @@ class MaskantaGAL:
     def PrintSummary(self):
         self._ancestor[0].printinfo(printlevel=3)
         self._childern[0].printinfo(printlevel=3)
+        print("Total serial #{}".format(self.SerialNumber))
 
-
+    def Dprint(self,str1,orglevel):
+        if(orglevel<=self.PrintLevel):
+            print(str1)
 
 
 
@@ -159,7 +194,7 @@ if __name__ == "__main__":
         MyMaskanta.AddProgram("MZ",0.20,20)
         MyMaskanta.calc()
         creature=MaskantaChild(1,"ancestor",MyMaskanta)
-        GAL=MaskantaGAL(10,100,100,PrintLevel=5)
+        GAL=MaskantaGAL(3,10,3,PrintLevel=3)
         GAL.addAncestor(creature)
         GAL.setMaxPayment(5000)
         GAL.Run()

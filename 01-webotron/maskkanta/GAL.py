@@ -11,26 +11,29 @@ class MaskantaChild:
         self.serial = serial
         self.isDataValid = True
 
+    def SetSerial(self,serial):
+        self.serial = serial
+
+
     def copyMaskanta(self,Maskanta):
         self.Maskanta=copy.deepcopy(Maskanta)
 
-    def ChangeTime(self,programN=2,time=-5):
+    def ChangeTime(self,debuglevel=0):
         """
         randomly select 1 program 1-totalamount (0 is used for prime - no change)
         them randomly time to change on program
         time select range (-5::5]) - time is mod by 30 so total time will be in range 10-30
         """
         programsNumbers=list(range(1,self.Maskanta.Nprograms())) #started from 1 , 0 is prime no changeTime
-        randomselectedprogram=random.randint(0,len(programsNumbers)-1)
+        randomselectedprogram=random.randint(1,len(programsNumbers))
         time = random.randint(-5,5)
-        randomselectedprogram=3
         #print("{} {}".format(randomselectedprogram,time))
         self.Maskanta.changeTime(randomselectedprogram,time)
         self.isDataValid = False
 
     def addyear(self):
         self.age +=1
-    def ChangePercents(self):
+    def ChangePercents(self,debuglevel=0):
         """
         randomly select 2 program 1-total (0 is used for prime - no change)
         them randomly select percent to move from program a to b
@@ -45,7 +48,8 @@ class MaskantaChild:
         else:
             secondprogramN=programsNumbers.pop(random.randint(0,len(programsNumbers)-1))
         random_selection=random.randint(-5,5)
-        self.Maskanta.changePercent(firstprogramN,secondprogramN,random_selection)
+
+        self.Maskanta.changePercent(firstprogramN,secondprogramN,random_selection,debuglevel)
         self.isDataValid = False
 
 

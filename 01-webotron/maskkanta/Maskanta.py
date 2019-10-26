@@ -140,7 +140,7 @@ class Maskanta:
         #print("new time {} {}".format(newtime,delta_time))
         program.SetTotalTime(newtime)
 
-    def changePercent(self,firstprogramN,secondprogramN,randomRumber):
+    def changePercent(self,firstprogramN,secondprogramN,randomRumber,debuglevel=0):
         program1 = self._programs[firstprogramN]
         program2 = self._programs[secondprogramN]
         Pecent1  = program1.GetPecent()
@@ -149,14 +149,35 @@ class Maskanta:
         #if(NewPercent1>=(Pecent1+Pecent2)):# in for example 0.1 0 and rand naumber is 5 --> 0.15 -0.05
         #    NewPercent1 = round(max(Pecent1*100-randomRumber,0))/100
         NewPercent2 = round((Pecent1+Pecent2-NewPercent1)*100)/100
-        if((NewPercent1<0)| (NewPercent2<0)):
-            return
-        program1.SetPecent(NewPercent1)
-        program2.SetPecent(NewPercent2)
-        if(NewPercent2*NewPercent1<0):
+        totalPercent = round((Pecent1+Pecent2)*100)/100
+
+        if(min(NewPercent1,NewPercent2)>=0.1):
+            """ regular case """
+            #print("case 158")
+            program1.SetPecent(NewPercent1)
+            program2.SetPecent(NewPercent2)
+        elif(Pecent1*Pecent2 == 0):
+            """ if 1 of the orignal values is 0 and the regular case didint help - swap"""
+            #print("case 163")
+            program1.SetPecent(Pecent2)
+            program2.SetPecent(Pecent1)
+        elif(min(NewPercent1,NewPercent2)<0.1):
+            """ regular case """
+            #print("case 168")
+            if(NewPercent1<0.1):
+                program1.SetPecent(0.0)
+                program2.SetPecent(totalPercent)
+            else:
+                program1.SetPecent(totalPercent)
+                program2.SetPecent(0.0)
+        else:
             print("programs {} {} - old {} {}".format(firstprogramN,secondprogramN,Pecent1,Pecent2))
-            print("                 new {} {}".format(NewPercent1,NewPercent2))
-            raise
+            print("                 new {} {}".format(program1.GetPecent(),program2.GetPecent()))
+            rasie
+
+        if(debuglevel>=3):
+            print("programs {} {} - old {} {}".format(firstprogramN,secondprogramN,Pecent1,Pecent2))
+            print("                 new {} {}".format(program1.GetPecent(),program2.GetPecent()))
         #print("programs {} {} - old {} {}".format(firstprogramN,secondprogramN,Pecent1,Pecent2))
         #print("                 new {} {}".format(NewPercent1,NewPercent2))
 
