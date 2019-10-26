@@ -26,7 +26,8 @@ class Maskanta:
         self.TotalPecent=0
         self._paymentreturns=[]
         self.avgTime=0
-
+    def GetPaymentReturn(self):
+        return self._paymentreturns
     def GetTotalAmont(self):
         return self._TotalAmont
     def GetMaxPayment(self):

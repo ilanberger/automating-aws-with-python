@@ -175,8 +175,8 @@ class MaskantaGAL:
         self._ancestor[0].printinfo(printlevel=3)
         self._childern[0].printinfo(printlevel=3)
         print("Total serial #{}".format(self.SerialNumber))
-        for childN , child in enumerate(self._childern,start=0):
-            child.printinfo(2)
+        #for childN , child in enumerate(self._childern,start=0):
+        #    child.printinfo(2)
 
     def Dprint(self,str1,orglevel):
         if(orglevel<=self.PrintLevel):

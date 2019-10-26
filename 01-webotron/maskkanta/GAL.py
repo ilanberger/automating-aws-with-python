@@ -14,6 +14,8 @@ class MaskantaChild:
     def SetSerial(self,serial):
         self.serial = serial
 
+    def GetSerial(self):
+        return self.serial
 
     def copyMaskanta(self,Maskanta):
         self.Maskanta=copy.deepcopy(Maskanta)
@@ -51,7 +53,8 @@ class MaskantaChild:
 
         self.Maskanta.changePercent(firstprogramN,secondprogramN,random_selection,debuglevel)
         self.isDataValid = False
-
+    def getReturns(self):
+        return self.Maskanta.GetPaymentReturn()
 
     def Run(self):
         if(self.isDataValid == False):
