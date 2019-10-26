@@ -69,7 +69,8 @@ class MaskantaChild:
     def printinfo(self,printlevel=1):
         if(self.isDataValid == False):
             self.Run()
-        print("serial {} age {}".format(self.serial,self.age))
+        if(printlevel>0):
+            print("serial {} age {}".format(self.serial,self.age))
         #self.Maskanta.print()
         self.Maskanta.printSummary(printlevel)
 

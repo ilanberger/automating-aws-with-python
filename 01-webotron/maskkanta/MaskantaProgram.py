@@ -111,6 +111,9 @@ class MaskantaProgram:
     def GetTotalTime(self):
         return self.time_in_years
 
+    def GetpresetValue(self):
+        return self.presetValue
+
     def SetTotalTime(self,time):
         self.time_in_years = time
         self.dataValid = False

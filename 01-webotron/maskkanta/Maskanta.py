@@ -25,6 +25,8 @@ class Maskanta:
         self._TotalAmont=0
         self.TotalPecent=0
         self._paymentreturns=[]
+        self.avgTime=0
+
     def GetTotalAmont(self):
         return self._TotalAmont
     def GetMaxPayment(self):
@@ -79,6 +81,9 @@ class Maskanta:
                     print("****** error in prgram cal *******")
                     program.PrintSummary()
                     raise
+            if(program.GetName!="PRIME"):
+                self.avgTime+=program.GetTotalTime()*program.GetPecent()
+
             self._maxyears = max(self._maxyears,program.GetTotalTime())
             self.TotalPecent += program.GetPecent()
 
@@ -121,7 +126,7 @@ class Maskanta:
 
     def printSummary(self,printlevel):
         if(printlevel>=2):
-            print("\tPV {:,} Total return {:,} first payment = {} max return = {} Maxyears {}".format(self.presetValue,int(self._TotalAmont),int(self._firstpayment),int(self._maxpayment),self._maxyears))
+            print("\tPV {:,} Total return {:,} first payment = {} max return = {} Avgyears {:3.3} (w_o prime)".format(self.presetValue,int(self._TotalAmont),int(self._firstpayment),int(self._maxpayment),self.avgTime))
         for program in self._programs:
             if(printlevel == 3):
                 print("\t  {:<6}  {:,}nis ({}) ({:0.3}%)".format(program.GetName(),int(program.GetTotalPay()),program.GetTotalTime(),program.GetPecent()*100))

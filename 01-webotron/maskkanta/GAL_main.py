@@ -109,7 +109,7 @@ class MaskantaGAL:
             if(self._childernDic["MaxPayment"][n]<self._maxPaymentaloud):
                 newchildlist.append(self._childern[n])
             else:
-                print("child {} removed".format(n))
+                self.Dprint("child {} removed".format(n),1)
             n+=1
         self._childern = newchildlist
         "some child were deleted need to doplecate others"
@@ -118,7 +118,6 @@ class MaskantaGAL:
 
     def RunRandomChange(self):
         self.savepreviousRun()
-        childN=-1
         for childN , child in enumerate(self._childern,start=0):
         #for child in self._childern:
         #    childN+=1
@@ -176,6 +175,8 @@ class MaskantaGAL:
         self._ancestor[0].printinfo(printlevel=3)
         self._childern[0].printinfo(printlevel=3)
         print("Total serial #{}".format(self.SerialNumber))
+        for childN , child in enumerate(self._childern,start=0):
+            child.printinfo(2)
 
     def Dprint(self,str1,orglevel):
         if(orglevel<=self.PrintLevel):
@@ -188,13 +189,15 @@ if __name__ == "__main__":
         MyMaskanta=Maskanta("low",800000)
         MyMaskanta.addMadad(1)
         MyMaskanta.AddProgram("PRIME",0.33,30)
-        MyMaskanta.AddProgram("MZ",0.13,10)
-        MyMaskanta.AddProgram("KLZ",0.20,20)
-        MyMaskanta.AddProgram("KZ",0.14,20)
-        MyMaskanta.AddProgram("MZ",0.20,20)
+        MyMaskanta.AddProgram("MZ",0.15,10)
+        MyMaskanta.AddProgram("KLZ",0.17,20)
+        MyMaskanta.AddProgram("KZ",0.15,20)
+        MyMaskanta.AddProgram("MZ",0.10,20)
+        MyMaskanta.AddProgram("MLZ",0.10,20)
         MyMaskanta.calc()
         creature=MaskantaChild(1,"ancestor",MyMaskanta)
-        GAL=MaskantaGAL(3,10,3,PrintLevel=3)
+        #GAL=MaskantaGAL(10,100,20,PrintLevel=0)
+        GAL=MaskantaGAL(10,100,100,PrintLevel=0)
         GAL.addAncestor(creature)
         GAL.setMaxPayment(5000)
         GAL.Run()
