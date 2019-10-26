@@ -13,6 +13,7 @@ pylint = "*"
 [packages]
 boto3 = "*"
 click = "*"
+matplotlib = "*"
 
 [requires]
 python_version = "3.7"
