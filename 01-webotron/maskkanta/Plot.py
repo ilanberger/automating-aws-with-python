@@ -47,7 +47,7 @@ class PrintMaskanta:
             TotalLeft=child.getTotalLeft()
             monthstimeline=range(0,len(TotalLeft))
             plt.plot(monthstimeline,TotalLeft,label=child.GetSerial())
-            print(child.GetSerial())
+
 
         #plt.plot(monthstimeline,[maxreturn]*len(monthstimeline),color='black',linestyle='dashed')
         plt.legend()
@@ -55,6 +55,71 @@ class PrintMaskanta:
         #plt.text(50, 2000, str_)
         plt.savefig(self.savepath+'TotalLeft.png')
         plt.clf()
+
+    def PlotMadad(self,ChildN=0):
+
+        #plt.set_label('TotalReturns')
+        plt.title("Madad [Month]")
+        plt.ylabel('expected MADAD')
+        plt.xlabel('months')
+
+        for child in self.MaskantaGAL:
+            Madad=child.GetMadad()
+            monthstimeline=range(0,len(Madad))
+            plt.plot(monthstimeline,Madad,label=child.GetSerial())
+
+        plt.legend()
+        plt.savefig(self.savepath+'Madad_month.png')
+        plt.clf()
+
+        plt.title("Madad [Year]")
+        plt.ylabel('expected MADAD')
+        plt.xlabel('Year')
+
+        for child in self.MaskantaGAL:
+            Madad=child.GetMadad_year()
+            monthstimeline=range(0,len(Madad))
+            plt.plot(monthstimeline,Madad,label=child.GetSerial())
+
+        plt.legend()
+        plt.savefig(self.savepath+'Madad_year.png')
+        plt.clf()
+
+
+    def PlotMadad1(self,ChildN=0):
+        fig, axs = plt.subplots(nrows=1, ncols=2, sharex=True)
+
+
+        ax = axs[0]
+        #plt.title("Madad [Month]")
+        ax.set_title('Madad [Months]')
+        ax.set_ylabel('expected MADAD')
+        ax.set_xlabel('months')
+
+        for child in self.MaskantaGAL:
+            Madad=child.GetMadad()
+            monthstimeline=range(0,len(Madad))
+            ax.plot(monthstimeline,Madad,label=child.GetSerial())
+        ax.set_ylim(0,3)
+        #ax.legend()
+
+
+        ax = axs[1]
+        ax.set_title('Madad [Years]')
+        ax.set_ylabel('expected MADAD')
+        ax.set_xlabel('Years')
+
+        for child in self.MaskantaGAL:
+            Madad=child.GetMadad_year()
+            yeartimeline=range(0,len(Madad))
+            ax.plot(yeartimeline,Madad,label=child.GetSerial())
+        ax.set_xlim(0, yeartimeline[-1])
+        ax.set_ylim(0,3)
+        #plt.legend()
+        plt.savefig(self.savepath+'Madad_all.png')
+        plt.clf()
+
+
 
 if __name__ == "__main__":
         MyMaskanta=Maskanta("low",800000)
@@ -90,3 +155,4 @@ if __name__ == "__main__":
         PM.AddMaskantaGAL(creature2)
         PM.PlotReturn(5000)
         PM.PlotSUMLeft()
+        PM.PlotMadad1()

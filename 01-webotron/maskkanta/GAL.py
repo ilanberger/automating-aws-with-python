@@ -19,6 +19,13 @@ class MaskantaChild:
 
     def copyMaskanta(self,Maskanta):
         self.Maskanta=copy.deepcopy(Maskanta)
+    def GetMadad(self):
+        return self.Maskanta.MADAD.GetMadad_list()
+
+    def GetMadad_year(self):
+        return self.Maskanta.MADAD.GetMadadYear_list()
+
+
 
     def ChangeTime(self,debuglevel=0):
         """
