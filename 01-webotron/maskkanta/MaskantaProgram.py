@@ -16,6 +16,7 @@ def calcMaskantaProgram(presetValue,rate,time_in_years,madad,printinfo=False):
     #rate_month=rate*1.0/12/100
     #madam_month=madad*1.0/12/100
     monthReturn_list=[]
+    TotalSumList_list=[]
     Keren_total=presetValue
     Rebit=0
     Keren_return=0
@@ -45,10 +46,11 @@ def calcMaskantaProgram(presetValue,rate,time_in_years,madad,printinfo=False):
         Sum_Rebit+=Rebit
         Sum_Total+=monthReturn
         monthReturn_list.append(monthReturn)
+        TotalSumList_list.append(Keren_total)
 
         Keren_total=Keren_total-Keren_return
 
-    return Sum_Rebit,Sum_Total,monthReturn_list
+    return Sum_Rebit,Sum_Total,monthReturn_list , TotalSumList_list
 
 class MaskantaProgram:
     """MaskantaProgram class."""
@@ -72,10 +74,11 @@ class MaskantaProgram:
 
 
     def calcProgram(self):
-        Sum_Rebit,Sum_Total,monthReturn_list = calcMaskantaProgram(self.presetValue,self.rate,self.time_in_years,self.madad,self.printdata)
+        Sum_Rebit,Sum_Total,monthReturn_list,TotalSumList_list = calcMaskantaProgram(self.presetValue,self.rate,self.time_in_years,self.madad,self.printdata)
         self.Sum_Rebit = Sum_Rebit
         self.Sum_Total = Sum_Total
         self.monthReturn_list = monthReturn_list
+        self.TotalSumListlist = TotalSumList_list
 
     def PrintSummary(self):
         print("\nMaskanta  {} {:,}\nTime = {}".format(self.Name, self.presetValue ,self.time_in_years))
@@ -95,7 +98,17 @@ class MaskantaProgram:
 
     def GetMonthlyPay(self):
         return self.monthReturn_list
+
+    def GetTotalSum(self,month):
+        if(month<=len(self.TotalSumListlist)):
+            return self.TotalSumListlist[month-1]
+        return 0
+
     def GetMonthReturn(self,month):
+        if(month<=len(self.monthReturn_list)):
+            return self.monthReturn_list[month-1]
+        return 0
+    def GetMonthSumLeft(self,month):
         if(month<=len(self.monthReturn_list)):
             return self.monthReturn_list[month-1]
         return 0

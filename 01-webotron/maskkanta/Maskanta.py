@@ -25,6 +25,7 @@ class Maskanta:
         self._TotalAmont=0
         self.TotalPecent=0
         self._paymentreturns=[]
+        self._Sumleft=[]
         self.avgTime=0
     def GetPaymentReturn(self):
         return self._paymentreturns
@@ -36,7 +37,8 @@ class Maskanta:
         return self._firstpayment
     def Nprograms(self):
         return len(self._programs)
-
+    def getTotalLeft(self):
+        return self._Sumleft
 
     def isMaskantaDataValid(self):
         return self.isMaskantaDataValid
@@ -82,8 +84,8 @@ class Maskanta:
                     print("****** error in prgram cal *******")
                     program.PrintSummary()
                     raise
-            if(program.GetName!="PRIME"):
-                self.avgTime+=program.GetTotalTime()*program.GetPecent()
+
+            self.avgTime+=program.GetTotalTime()*program.GetPecent()
 
             self._maxyears = max(self._maxyears,program.GetTotalTime())
             self.TotalPecent += program.GetPecent()
@@ -102,19 +104,27 @@ class Maskanta:
 
             tempstr+="{0:<10}".format(program.GetName())
 
-        tempstr+="  |  Total"
+        tempstr+="  |  Total  | Sum left "
         if(printTable):
             print(tempstr)
+        
         for month in range(1,self._maxyears*12+2):
             monthsum=0
+            totalSumLeft = 0
             tempstr=""
             tempstr+="{:3} ".format(month)
             for program in self._programs:
+                totalSumLeft += program.GetTotalSum(month)
                 val=program.GetMonthReturn(month)
+
                 monthsum+=val
                 tempstr+="{:8.0f} ".format(val)
+
             self._paymentreturns.append(monthsum)
+            self._Sumleft.append(totalSumLeft)
+
             tempstr+="  |  {:8.0f} ".format(monthsum)
+            tempstr+="  |  {:8.0f} ".format(totalSumLeft)
             if(printTable):
                 print(tempstr)
         self._firstpayment=self._paymentreturns[0]
@@ -125,7 +135,7 @@ class Maskanta:
         for program in self._programs:
             print("\t{:<6}  {:,}nis ({}) ({:0.3}%)".format(program.GetName(),int(program.GetTotalPay()),program.GetTotalTime(),program.GetPecent()*100))
 
-    def printSummary(self,printlevel):
+    def printSummary(self,printlevel= 0):
         if(printlevel>=2):
             print("\tPV {:,} Total return {:,} first payment = {} max return = {} Avgyears {:3.3} (w_o prime)".format(self.presetValue,int(self._TotalAmont),int(self._firstpayment),int(self._maxpayment),self.avgTime))
         for program in self._programs:
@@ -197,5 +207,6 @@ if __name__ == "__main__":
     MyMaskanta.AddProgram("PRIME",1/3,30)
     MyMaskanta.AddProgram("KLZ",1/3,20,6)
     MyMaskanta.calc(False)
-    MyMaskanta.printSummary()
+    MyMaskanta.printSummary(5)
+    print(MyMaskanta._Sumleft[0:5])
     #MyMaskanta.PrintTable()

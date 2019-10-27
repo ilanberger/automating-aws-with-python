@@ -29,14 +29,32 @@ class PrintMaskanta:
             plt.plot(monthstimeline,returns,label=child.GetSerial())
             TotalAmont , MaxPayment , FirstPayment = child.GetMaskandaData()
             str_+="{} {:,}\n".format(child.GetSerial(),TotalAmont)
-            print(str_)
+            #print(str_)
         plt.plot(monthstimeline,[maxreturn]*len(monthstimeline),color='black',linestyle='dashed')
         plt.legend()
         #plt.text(50, 2000, "blabla", {'color': 'C2', 'fontsize': 18}, va="top", ha="right")
         plt.text(50, 2000, str_)
-        plt.savefig(self.savepath+'foo.png')
+        plt.savefig(self.savepath+'MonthlyPayment.png')
+        plt.clf()
 
+    def PlotSUMLeft(self):
 
+        #plt.set_label('TotalReturns')
+        plt.title("Total left")
+        plt.ylabel('Total amount')
+        plt.xlabel('months')
+        for child in self.MaskantaGAL:
+            TotalLeft=child.getTotalLeft()
+            monthstimeline=range(0,len(TotalLeft))
+            plt.plot(monthstimeline,TotalLeft,label=child.GetSerial())
+            print(child.GetSerial())
+
+        #plt.plot(monthstimeline,[maxreturn]*len(monthstimeline),color='black',linestyle='dashed')
+        plt.legend()
+        #plt.text(50, 2000, "blabla", {'color': 'C2', 'fontsize': 18}, va="top", ha="right")
+        #plt.text(50, 2000, str_)
+        plt.savefig(self.savepath+'TotalLeft.png')
+        plt.clf()
 
 if __name__ == "__main__":
         MyMaskanta=Maskanta("low",800000)
@@ -71,3 +89,4 @@ if __name__ == "__main__":
         PM.AddMaskantaGAL(creature1)
         PM.AddMaskantaGAL(creature2)
         PM.PlotReturn(5000)
+        PM.PlotSUMLeft()

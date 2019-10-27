@@ -56,6 +56,8 @@ class MaskantaChild:
     def getReturns(self):
         return self.Maskanta.GetPaymentReturn()
 
+    def getTotalLeft(self):
+        return self.Maskanta.getTotalLeft()
     def Run(self):
         if(self.isDataValid == False):
             self.Maskanta.calc() # calc will amke sure all data is valid
