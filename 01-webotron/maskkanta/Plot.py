@@ -146,13 +146,25 @@ if __name__ == "__main__":
         MyMaskanta2.AddProgram("PRIME",0.33,30)
         MyMaskanta2.AddProgram("KLZ",0.67,13)
         MyMaskanta2.calc()
-        creature2 = MaskantaChild(2,"Best",MyMaskanta2)
+        creature2 = MaskantaChild(2,"Best long prime",MyMaskanta2)
+
+        MyMaskanta3=Maskanta("low",800000)
+        MyMaskanta3.addMadad(1)
+        MyMaskanta3.AddProgram("PRIME",0.20,18)
+        MyMaskanta3.AddProgram("KLZ",0.57,16)
+        MyMaskanta3.AddProgram("KZ",0.23,15)
+        MyMaskanta3.calc()
+        creature3 = MaskantaChild(2,"Best short prime",MyMaskanta3)
+
 
         PM=PrintMaskanta()
         PM.SetSavePath("/Users/iberger/Documents/temp/")
         PM.AddMaskantaGAL(creature)
         PM.AddMaskantaGAL(creature1)
         PM.AddMaskantaGAL(creature2)
+        PM.AddMaskantaGAL(creature3)
+
+
         PM.PlotReturn(5000)
         PM.PlotSUMLeft()
         PM.PlotMadad1()

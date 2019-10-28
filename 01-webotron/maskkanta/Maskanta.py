@@ -8,6 +8,7 @@ class Maskanta:
         self.limit = limit
         self.presetValue= presetValue
         self._programs=[]
+        self._programsNotLocked=[]
         self.addMadad(0)
 
 
@@ -25,6 +26,7 @@ class Maskanta:
         self._TotalAmont=0
         self.TotalPecent=0
         self._paymentreturns=[]
+
         self._Sumleft=[]
         self.avgTime=0
     def GetPaymentReturn(self):
@@ -53,13 +55,17 @@ class Maskanta:
     def addMadad(self,Madad,printMadad=False):
         self.MADAD=CMADAD(Madad,printMadad)
 
-    def AddProgram(self,RIBIT_Type,Pecent,time_in_years,ribit=None,printData=False):
+    def AddProgram(self,RIBIT_Type,Pecent,time_in_years,ribit=None,printData=False,programsLocked=False):
 
 
         ribitClass=CRIBIT(RIBIT_Type,time_in_years,self.limit,ribit)
         self._programs.append(
             MaskantaProgram(RIBIT_Type,self.presetValue,Pecent,ribitClass,time_in_years,self.MADAD,printData)
         )
+        if(programsLocked == False):
+            self._programsNotLocked.append(len(self._programs)-1)
+    def GetProgramsNotLocked(self):
+        return self._programsNotLocked
     def checkallvaluesvalid(self):
         #print("total part of maskanta {}".format(self.TotalPecent) )
         if (abs(self.TotalPecent - 1))>0.001:
@@ -107,7 +113,7 @@ class Maskanta:
         tempstr+="  |  Total  | Sum left "
         if(printTable):
             print(tempstr)
-        
+
         for month in range(1,self._maxyears*12+2):
             monthsum=0
             totalSumLeft = 0
@@ -203,10 +209,14 @@ if __name__ == "__main__":
 
     MyMaskanta=Maskanta("low",800000)
     MyMaskanta.addMadad(1)
-    MyMaskanta.AddProgram("MZ",1/3,10)
+    MyMaskanta.AddProgram("MZ",1/3,10,programsLocked=True)
     MyMaskanta.AddProgram("PRIME",1/3,30)
     MyMaskanta.AddProgram("KLZ",1/3,20,6)
+    b=MyMaskanta.GetProgramsNotLocked()
+    print(MyMaskanta.GetProgramsNotLocked())
+
+    print(MyMaskanta._programsNotLocked)
     MyMaskanta.calc(False)
-    MyMaskanta.printSummary(5)
-    print(MyMaskanta._Sumleft[0:5])
+    print(MyMaskanta.GetProgramsNotLocked())
+    #MyMaskanta.printSummary(5)
     #MyMaskanta.PrintTable()

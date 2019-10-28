@@ -188,7 +188,7 @@ class MaskantaGAL:
 if __name__ == "__main__":
         MyMaskanta=Maskanta("low",800000)
         MyMaskanta.addMadad(1)
-        MyMaskanta.AddProgram("PRIME",0.33,30)
+        MyMaskanta.AddProgram("PRIME",0.33,30,programsLocked=False)
         MyMaskanta.AddProgram("MZ",0.15,10)
         MyMaskanta.AddProgram("KLZ",0.17,20)
         MyMaskanta.AddProgram("KZ",0.15,20)
@@ -196,7 +196,7 @@ if __name__ == "__main__":
         MyMaskanta.AddProgram("MLZ",0.10,20)
         MyMaskanta.calc()
         creature=MaskantaChild(1,"ancestor",MyMaskanta)
-        #GAL=MaskantaGAL(10,100,20,PrintLevel=0)
+        #GAL=MaskantaGAL(3,10,2,PrintLevel=0)
         GAL=MaskantaGAL(10,100,100,PrintLevel=0)
         GAL.addAncestor(creature)
         GAL.setMaxPayment(5000)

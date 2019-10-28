@@ -33,8 +33,9 @@ class MaskantaChild:
         them randomly time to change on program
         time select range (-5::5]) - time is mod by 30 so total time will be in range 10-30
         """
-        programsNumbers=list(range(1,self.Maskanta.Nprograms())) #started from 1 , 0 is prime no changeTime
-        randomselectedprogram=random.randint(1,len(programsNumbers))
+        #programsNumbers=list(range(1,self.Maskanta.Nprograms())) #started from 1 , 0 is prime no changeTime
+        programsNumbers=copy.copy(self.Maskanta.GetProgramsNotLocked())
+        randomselectedprogram=random.randint(0,len(programsNumbers)-1)
         time = random.randint(-5,5)
         #print("{} {}".format(randomselectedprogram,time))
         self.Maskanta.changeTime(randomselectedprogram,time)
@@ -48,7 +49,8 @@ class MaskantaChild:
         them randomly select percent to move from program a to b
         percent select range (-5::5])
         """
-        programsNumbers=list(range(1,self.Maskanta.Nprograms())) #started from 1 , 0 is prime no changeTime
+        programsNumbers=copy.copy(self.Maskanta.GetProgramsNotLocked())
+        #programsNumbers=list(range(1,self.Maskanta.Nprograms())) #started from 1 , 0 is prime no changeTime
         randomselectedprogram=random.randint(0,len(programsNumbers)-1)
         #print(programsNumbers,randomselectedprogram)
         firstprogramN=programsNumbers.pop(randomselectedprogram)
@@ -91,13 +93,15 @@ if __name__ == "__main__":
 
     MyMaskanta=Maskanta("low",800000)
     MyMaskanta.addMadad(1)
-    MyMaskanta.AddProgram("PRIME",0.33,30)
-    MyMaskanta.AddProgram("MZ",0.13,10)
+    MyMaskanta.AddProgram("PRIME",0.33,30,programsLocked=False)
+    MyMaskanta.AddProgram("MZ",0.13,10,programsLocked=True)
     MyMaskanta.AddProgram("KLZ",0.20,20)
     MyMaskanta.AddProgram("KZ",0.14,20)
     MyMaskanta.AddProgram("MZ",0.20,20)
     MyMaskanta.calc(printSummary=False,printTable=False)
+
     creature=MaskantaChild(1,"aaa",MyMaskanta)
+    print(creature.Maskanta.GetProgramsNotLocked())
     creature.printinfo()
     creature.ChangeTime()
     creature.printinfo(printlevel=3)

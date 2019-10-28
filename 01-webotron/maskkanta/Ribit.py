@@ -143,6 +143,7 @@ class CMADAD:
             if((i+1)%12 == 0):
                 year_list.append(sum)
                 sum=0
+                
         return year_list
     def GetMadad_print(self):
         str_="Madad\nconstent of %{} per year\n".format(self._vlauesyear[0])
