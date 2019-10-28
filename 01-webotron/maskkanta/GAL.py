@@ -25,7 +25,9 @@ class MaskantaChild:
     def GetMadad_year(self):
         return self.Maskanta.MADAD.GetMadadYear_list()
 
-
+    def GetRibits(self):
+        ProgramNames , ProgramValues = self.Maskanta.GetRibits(self)
+        return ProgramNames , ProgramValues
 
     def ChangeTime(self,debuglevel=0):
         """

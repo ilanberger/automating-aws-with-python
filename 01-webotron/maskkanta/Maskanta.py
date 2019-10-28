@@ -203,7 +203,13 @@ class Maskanta:
         #print("programs {} {} - old {} {}".format(firstprogramN,secondprogramN,Pecent1,Pecent2))
         #print("                 new {} {}".format(NewPercent1,NewPercent2))
 
-
+    def GetRibits(self):
+        ProgramNames=[]
+        ProgramValues=[]
+        for program in self._programs:
+            ProgramNames.append(program.GetName())
+            ProgramValues.append(program.rate.GetRIBIT(year=True))
+        return ProgramNames , ProgramValues
 
 if __name__ == "__main__":
 

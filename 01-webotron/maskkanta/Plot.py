@@ -85,6 +85,27 @@ class PrintMaskanta:
         plt.savefig(self.savepath+'Madad_year.png')
         plt.clf()
 
+    def PlotRribits(self,ChildN=0):
+        plotcolors=["blue","green","red","cyan","magenta","yellow","black"]
+
+
+        child  = self.MaskantaGAL[ChildN]
+        ProgramNames , ProgramValues = child.Maskanta.GetRibits()
+        plt.title("RIBITS of {}".format(child.GetSerial()))
+        plt.ylabel('expected RIBITS')
+        plt.xlabel('Years')
+        p=0
+        for ProgramName in ProgramNames:
+            color=plotcolors[p]
+            plt.plot(ProgramValues[p],label=ProgramName, color = color)
+            if(ProgramName in ["KZ","MZ"]):
+                #add madad_number
+                ribit_and_madad=[sum(x) for x in zip(ProgramValues[p], child.GetMadad_year())]
+                plt.plot(ribit_and_madad,linestyle='dashed',label="{}+madad".format(ProgramName),color = color)
+            p+=1
+        plt.legend()
+        plt.savefig(self.savepath+'Ribits_of_{}.png'.format(child.GetSerial()))
+        plt.clf()
 
     def PlotMadad1(self,ChildN=0):
         fig, axs = plt.subplots(nrows=1, ncols=2, sharex=True)
@@ -122,7 +143,9 @@ class PrintMaskanta:
 
 
 if __name__ == "__main__":
-        MyMaskanta=Maskanta("low",800000)
+        PV=800000
+
+        MyMaskanta=Maskanta("low",PV)
         MyMaskanta.addMadad(1)
         MyMaskanta.AddProgram("PRIME",0.33,30)
         MyMaskanta.AddProgram("MZ",0.15,10)
@@ -133,7 +156,7 @@ if __name__ == "__main__":
         MyMaskanta.calc()
         creature=MaskantaChild(1,"ancestor",MyMaskanta)
 
-        MyMaskanta1=Maskanta("low",800000)
+        MyMaskanta1=Maskanta("low",PV)
         MyMaskanta1.addMadad(1)
         MyMaskanta1.AddProgram("PRIME",0.33,30)
         MyMaskanta1.AddProgram("KLZ",0.37,20)
@@ -141,14 +164,14 @@ if __name__ == "__main__":
         MyMaskanta1.calc()
         creature1 = MaskantaChild(2,"programA",MyMaskanta1)
 
-        MyMaskanta2=Maskanta("low",800000)
+        MyMaskanta2=Maskanta("low",PV)
         MyMaskanta2.addMadad(1)
         MyMaskanta2.AddProgram("PRIME",0.33,30)
         MyMaskanta2.AddProgram("KLZ",0.67,13)
         MyMaskanta2.calc()
         creature2 = MaskantaChild(2,"Best long prime",MyMaskanta2)
 
-        MyMaskanta3=Maskanta("low",800000)
+        MyMaskanta3=Maskanta("low",PV)
         MyMaskanta3.addMadad(1)
         MyMaskanta3.AddProgram("PRIME",0.20,18)
         MyMaskanta3.AddProgram("KLZ",0.57,16)
@@ -168,3 +191,4 @@ if __name__ == "__main__":
         PM.PlotReturn(5000)
         PM.PlotSUMLeft()
         PM.PlotMadad1()
+        PM.PlotRribits(0)
