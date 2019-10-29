@@ -41,7 +41,8 @@ class Maskanta:
         return len(self._programs)
     def getTotalLeft(self):
         return self._Sumleft
-
+    def getAvgTime(self):
+        return self.avgTime
     def isMaskantaDataValid(self):
         return self.isMaskantaDataValid
     def checkLimitvalis(self):

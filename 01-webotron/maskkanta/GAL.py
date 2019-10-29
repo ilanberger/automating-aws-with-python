@@ -19,6 +19,7 @@ class MaskantaChild:
 
     def copyMaskanta(self,Maskanta):
         self.Maskanta=copy.deepcopy(Maskanta)
+
     def GetMadad(self):
         return self.Maskanta.MADAD.GetMadad_list()
 
@@ -80,6 +81,9 @@ class MaskantaChild:
         MaxPayment = round(self.Maskanta.GetMaxPayment())
         FirstPayment = round(self.Maskanta.GetFirstPayment())
         return TotalAmont , MaxPayment , FirstPayment
+        
+    def GetAvgTime(self):
+        return self.Maskanta.getAvgTime()
 
 
     def printinfo(self,printlevel=1):

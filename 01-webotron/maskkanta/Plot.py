@@ -142,53 +142,121 @@ class PrintMaskanta:
 
 
 
+
+def PlotExamples():
+    PV=800000
+
+    MyMaskanta=Maskanta("low",PV)
+    MyMaskanta.addMadad(1)
+    MyMaskanta.AddProgram("PRIME",0.33,30)
+    MyMaskanta.AddProgram("MZ",0.15,10)
+    MyMaskanta.AddProgram("KLZ",0.17,20)
+    MyMaskanta.AddProgram("KZ",0.15,20)
+    MyMaskanta.AddProgram("MZ",0.10,20)
+    MyMaskanta.AddProgram("MLZ",0.10,20)
+    MyMaskanta.calc()
+    creature=MaskantaChild(1,"ancestor",MyMaskanta)
+
+    MyMaskanta1=Maskanta("low",PV)
+    MyMaskanta1.addMadad(1)
+    MyMaskanta1.AddProgram("PRIME",0.33,30)
+    MyMaskanta1.AddProgram("KLZ",0.37,20)
+    MyMaskanta1.AddProgram("MZ",0.30,20)
+    MyMaskanta1.calc()
+    creature1 = MaskantaChild(2,"programA",MyMaskanta1)
+
+    MyMaskanta2=Maskanta("low",PV)
+    MyMaskanta2.addMadad(1)
+    MyMaskanta2.AddProgram("PRIME",0.33,30)
+    MyMaskanta2.AddProgram("KLZ",0.67,13)
+    MyMaskanta2.calc()
+    creature2 = MaskantaChild(2,"Best long prime",MyMaskanta2)
+
+    MyMaskanta3=Maskanta("low",PV)
+    MyMaskanta3.addMadad(1)
+    MyMaskanta3.AddProgram("PRIME",0.20,18)
+    MyMaskanta3.AddProgram("KLZ",0.57,16)
+    MyMaskanta3.AddProgram("KZ",0.23,15)
+    MyMaskanta3.calc()
+    creature3 = MaskantaChild(2,"Best short prime",MyMaskanta3)
+
+
+    PM=PrintMaskanta()
+    PM.SetSavePath("/Users/iberger/Documents/temp/")
+    PM.AddMaskantaGAL(creature)
+    PM.AddMaskantaGAL(creature1)
+    PM.AddMaskantaGAL(creature2)
+    PM.AddMaskantaGAL(creature3)
+
+
+    PM.PlotReturn(5000)
+    PM.PlotSUMLeft()
+    PM.PlotMadad1()
+    PM.PlotRribits(0)
+
+def RunMultiGal(outpath,totalAmount = 800000 ):
+
+    MyMaskanta=Maskanta("low",totalAmount)
+    MyMaskanta.addMadad(1)
+    MyMaskanta.AddProgram("PRIME",0.33,30,programsLocked=False)
+    MyMaskanta.AddProgram("MZ",0.15,10)
+    MyMaskanta.AddProgram("KLZ",0.17,20)
+    MyMaskanta.AddProgram("KZ",0.15,20)
+    MyMaskanta.AddProgram("MZ",0.10,20)
+    MyMaskanta.AddProgram("MLZ",0.10,20)
+    MyMaskanta.calc()
+    creature=MaskantaChild(1,"ancestor",MyMaskanta)
+    #GAL=MaskantaGAL(3,10,10,PrintLevel=0)
+    GAL=MaskantaGAL(10,100,100,PrintLevel=0)
+    GAL.addAncestor(creature)
+
+    TotalAmont_list=[]
+    MaxPayment_list=[]
+    FirstPayment_list=[]
+    TotalTime_list=[]
+    return_list = [4000,5000,5500,6000,6500,7000]
+    for Maxreturn in return_list:
+    #for Maxreturn in [4000]:
+        print("----------- Running calc for max return {}  ---------------".format(Maxreturn))
+        GAL.setMaxPayment(Maxreturn)
+        GAL.Run()
+        GAL.PrintSummary()
+
+        TotalAmont , MaxPayment , FirstPayment = GAL.GetGALChildData(Nchild=0)
+        GetAvgTime = GAL.GetAvgTime(Nchild=0)
+
+        TotalAmont_list.append(TotalAmont)
+        MaxPayment_list.append(MaxPayment)
+        FirstPayment_list.append(FirstPayment)
+        TotalTime_list.append(GetAvgTime)
+        GAL.initGal()
+
+    print(TotalAmont_list)
+    print(return_list)
+    print(MaxPayment_list)
+    print(FirstPayment_list)
+
+
+    """TotalAmont_list = [980956, 941408, 923116, 914217, 907371, 896502]
+    return_list = [4000, 5000, 5500, 6000, 6500, 7000]
+    MaxPayment_list = [3992, 4980, 5482, 5990, 6499, 6890]
+    FirstPayment_list =[3820, 4525, 5086, 5483, 6272, 6178]
+    TotalTime_list =[30, 25, 20, 19, 18, 16]
+    """
+    plt.title("Best Mskanta by Max monlth pay")
+    plt.xlabel('FirstPayment')
+    plt.ylabel('MaxPayment')
+
+
+    for i in range(len(TotalAmont_list)):
+        plt.text(FirstPayment_list[i],MaxPayment_list[i],"{:,}nis, {} years".format(TotalAmont_list[i],TotalTime_list[i]))
+    plt.plot(FirstPayment_list,MaxPayment_list)
+    plt.plot(range(FirstPayment_list[0],FirstPayment_list[-1]),range(FirstPayment_list[0],FirstPayment_list[-1]))
+    #plt.legend()
+    plt.savefig(outpath+'MaskantaByReturn.png')
+    plt.clf()
+
 if __name__ == "__main__":
-        PV=800000
-
-        MyMaskanta=Maskanta("low",PV)
-        MyMaskanta.addMadad(1)
-        MyMaskanta.AddProgram("PRIME",0.33,30)
-        MyMaskanta.AddProgram("MZ",0.15,10)
-        MyMaskanta.AddProgram("KLZ",0.17,20)
-        MyMaskanta.AddProgram("KZ",0.15,20)
-        MyMaskanta.AddProgram("MZ",0.10,20)
-        MyMaskanta.AddProgram("MLZ",0.10,20)
-        MyMaskanta.calc()
-        creature=MaskantaChild(1,"ancestor",MyMaskanta)
-
-        MyMaskanta1=Maskanta("low",PV)
-        MyMaskanta1.addMadad(1)
-        MyMaskanta1.AddProgram("PRIME",0.33,30)
-        MyMaskanta1.AddProgram("KLZ",0.37,20)
-        MyMaskanta1.AddProgram("MZ",0.30,20)
-        MyMaskanta1.calc()
-        creature1 = MaskantaChild(2,"programA",MyMaskanta1)
-
-        MyMaskanta2=Maskanta("low",PV)
-        MyMaskanta2.addMadad(1)
-        MyMaskanta2.AddProgram("PRIME",0.33,30)
-        MyMaskanta2.AddProgram("KLZ",0.67,13)
-        MyMaskanta2.calc()
-        creature2 = MaskantaChild(2,"Best long prime",MyMaskanta2)
-
-        MyMaskanta3=Maskanta("low",PV)
-        MyMaskanta3.addMadad(1)
-        MyMaskanta3.AddProgram("PRIME",0.20,18)
-        MyMaskanta3.AddProgram("KLZ",0.57,16)
-        MyMaskanta3.AddProgram("KZ",0.23,15)
-        MyMaskanta3.calc()
-        creature3 = MaskantaChild(2,"Best short prime",MyMaskanta3)
-
-
-        PM=PrintMaskanta()
-        PM.SetSavePath("/Users/iberger/Documents/temp/")
-        PM.AddMaskantaGAL(creature)
-        PM.AddMaskantaGAL(creature1)
-        PM.AddMaskantaGAL(creature2)
-        PM.AddMaskantaGAL(creature3)
-
-
-        PM.PlotReturn(5000)
-        PM.PlotSUMLeft()
-        PM.PlotMadad1()
-        PM.PlotRribits(0)
+    #PlotExamples()
+    outpath="/Users/iberger/Documents/temp/"
+    RunMultiGal(outpath,800000)

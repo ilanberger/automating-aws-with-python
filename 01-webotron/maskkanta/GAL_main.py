@@ -18,6 +18,13 @@ class MaskantaGAL:
         self._childernDic_previousRun={}
         self.SerialNumber=0
 
+    def initGal(self):
+        self._childern=[]
+        self._childernDic={}
+        self._childern_previousRun=[]
+        self._childernDic_previousRun={}
+        self.initChildern()
+
     def setMaxPayment(self,maxpayment):
         self._maxPaymentaloud = maxpayment
 
@@ -58,6 +65,7 @@ class MaskantaGAL:
     def createChildern(self):
 
         N=0
+
         while(len(self._childern)<self.TotalChilds):
             temp = copy.deepcopy(self._childern[N])
             self._childern.append(temp)
@@ -105,8 +113,18 @@ class MaskantaGAL:
     def KillBadresults(self):
         newchildlist = []
         n=0
+
+
+        #what if all values are above wanted value?
+        if(min(self._childernDic["MaxPayment"])<self._maxPaymentaloud):
+            MaxPaycutoff=self._maxPaymentaloud
+        else:
+            vallist=copy.deepcopy(self._childernDic["MaxPayment"])
+            vallist.sort()
+            MaxPaycutoff=vallist[self.SaveNextGen]
+
         for i in range(len(self._childernDic["MaxPayment"])):
-            if(self._childernDic["MaxPayment"][n]<self._maxPaymentaloud):
+            if(self._childernDic["MaxPayment"][n]<MaxPaycutoff):
                 newchildlist.append(self._childern[n])
             else:
                 self.Dprint("child {} removed".format(n),1)
@@ -182,7 +200,15 @@ class MaskantaGAL:
         if(orglevel<=self.PrintLevel):
             print(str1)
 
+    def GetGALChildData(self,Nchild=0):
+        child = self._childern[Nchild]
+        TotalAmont , MaxPayment , FirstPayment = child.GetMaskandaData()
 
+        return TotalAmont , MaxPayment , FirstPayment
+
+    def GetAvgTime(self,Nchild=0):
+        child = self._childern[Nchild]
+        return  round(child.GetAvgTime())
 
 
 if __name__ == "__main__":
@@ -196,9 +222,38 @@ if __name__ == "__main__":
         MyMaskanta.AddProgram("MLZ",0.10,20)
         MyMaskanta.calc()
         creature=MaskantaChild(1,"ancestor",MyMaskanta)
-        #GAL=MaskantaGAL(3,10,2,PrintLevel=0)
-        GAL=MaskantaGAL(10,100,100,PrintLevel=0)
+        GAL=MaskantaGAL(3,10,10,PrintLevel=0)
+        #GAL=MaskantaGAL(10,100,100,PrintLevel=0)
         GAL.addAncestor(creature)
-        GAL.setMaxPayment(5000)
-        GAL.Run()
-        GAL.PrintSummary()
+        if(0):
+            GAL.setMaxPayment(5000)
+            GAL.Run()
+            GAL.PrintSummary()
+        else:
+
+
+            TotalAmont_list=[]
+            MaxPayment_list=[]
+            FirstPayment_list=[]
+            TotalTime_list=[]
+            return_list = [4000,5000,5500,6000,6500,7000]
+            for Maxreturn in return_list:
+            #for Maxreturn in [4000]:
+                print("----------- Running calc for max return {}  ---------------".format(Maxreturn))
+                GAL.setMaxPayment(Maxreturn)
+                GAL.Run()
+                GAL.PrintSummary()
+                TotalAmont , MaxPayment , FirstPayment = GAL.GetGALChildData(Nchild=0)
+                GetAvgTime = GAL.GetAvgTime(Nchild=0)
+
+                TotalAmont_list.append(TotalAmont)
+                MaxPayment_list.append(MaxPayment)
+                FirstPayment_list.append(FirstPayment)
+                TotalTime_list.append(GetAvgTime)
+
+                GAL.initGal()
+            print(TotalAmont_list)
+            print(return_list)
+            print(MaxPayment_list)
+            print(FirstPayment_list)
+            print(TotalTime_list)
