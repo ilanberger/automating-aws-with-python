@@ -110,9 +110,17 @@ class MaskantaGAL:
                 print(nchild),
                 child.printinfo(self.PrintLevel)
 
+    def _childcheckMaxPayment(self,n,MaxPaycutoff):
+        if(self._childernDic["MaxPayment"][n]<=MaxPaycutoff):
+            return True
+        return False
+
+
     def KillBadresults(self):
         newchildlist = []
         n=0
+
+
 
 
         #what if all values are above wanted value?
@@ -124,7 +132,13 @@ class MaskantaGAL:
             MaxPaycutoff=vallist[self.SaveNextGen]
 
         for i in range(len(self._childernDic["MaxPayment"])):
-            if(self._childernDic["MaxPayment"][n]<MaxPaycutoff):
+
+            #check new child is ok
+            KeepChild=True
+            KeepChild= KeepChild  & (self._childcheckMaxPayment(n,MaxPaycutoff))
+
+
+            if(KeepChild==True):
                 newchildlist.append(self._childern[n])
             else:
                 self.Dprint("child {} removed".format(n),1)
@@ -222,10 +236,10 @@ if __name__ == "__main__":
         MyMaskanta.AddProgram("MLZ",0.10,20)
         MyMaskanta.calc()
         creature=MaskantaChild(1,"ancestor",MyMaskanta)
-        GAL=MaskantaGAL(3,10,10,PrintLevel=0)
-        #GAL=MaskantaGAL(10,100,100,PrintLevel=0)
+        #GAL=MaskantaGAL(3,10,10,PrintLevel=0)
+        GAL=MaskantaGAL(10,100,100,PrintLevel=0)
         GAL.addAncestor(creature)
-        if(0):
+        if(1):
             GAL.setMaxPayment(5000)
             GAL.Run()
             GAL.PrintSummary()

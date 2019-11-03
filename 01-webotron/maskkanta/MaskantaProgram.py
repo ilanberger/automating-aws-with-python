@@ -1,6 +1,6 @@
 #!/user/bin/python
 
-from Ribit import *
+from Ribit_bank_isreal_september_19 import *
 from MADAD import *
 def PMT(presetValue,rate,time_in_years):
     time_in_months=time_in_years*12.0
