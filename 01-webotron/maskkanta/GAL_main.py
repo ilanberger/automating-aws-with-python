@@ -28,6 +28,9 @@ class MaskantaGAL:
     def setMaxPayment(self,maxpayment):
         self._maxPaymentaloud = maxpayment
 
+    def setFirstPayment(self,FirstPayment):
+        self._FirstPayment = FirstPayment
+
     def savepreviousRun(self):
         #self._childern_previousRun=copy.deepcopy(self._childern)
         self._childernDic_previousRun=copy.deepcopy(self._childernDic)
@@ -109,6 +112,11 @@ class MaskantaGAL:
                 print(nchild),
                 child.printinfo(self.PrintLevel)
 
+    def _childcheckFirstPayment(self,n):
+        if(self._childernDic["FirstPayment"][n]<=self._FirstPayment):
+            return True
+        return False
+
     def _childcheckMaxPayment(self,n,MaxPaycutoff):
         if(self._childernDic["MaxPayment"][n]<=MaxPaycutoff):
             return True
@@ -157,9 +165,11 @@ class MaskantaGAL:
         for i in range(len(self._childern)):
 
             #check new child is ok
+            KeepChild_maxpayment = KeepChild_primecheck = KeepChild_Firstpayment =True
             KeepChild_maxpayment = self._childcheckMaxPayment(n,MaxPaycutoff)
             KeepChild_primecheck = self._childPrimeCheck(n)
-            KeepChild = KeepChild_maxpayment & KeepChild_primecheck
+            KeepChild_Firstpayment =self._childcheckFirstPayment(n)
+            KeepChild = KeepChild_maxpayment & KeepChild_primecheck & KeepChild_Firstpayment
             #print("\n {} KeepChild {} (KeepChild_maxpayment {} KeepChild_primecheck {})".format(n,KeepChild,KeepChild_maxpayment,KeepChild_primecheck))
             if(KeepChild==True):
                 newchildlist.append(self._childern[n])
@@ -250,20 +260,20 @@ class MaskantaGAL:
 
 if __name__ == "__main__":
         MyMaskanta=Maskanta("low",900000)
-        MyMaskanta.addMadad(1.5)
-        MyMaskanta.AddProgram("PRIME",0.33,30,programsLocked=True)
-        MyMaskanta.AddProgram("MZ",0.15,10)
-        MyMaskanta.AddProgram("KLZ",0.17,20)
-        MyMaskanta.AddProgram("KZ",0.15,20)
-        MyMaskanta.AddProgram("MZ",0.10,20)
-        MyMaskanta.AddProgram("MLZ",0.10,20)
+        MyMaskanta.addMadad(1)
+        MyMaskanta.AddProgram("PRIME",0.33,30,programsLocked=False)
+        MyMaskanta.AddProgram("MZ",0.13,10)
+        MyMaskanta.AddProgram("KLZ",0.13,20)
+        MyMaskanta.AddProgram("KZ",0.20,20)
+        MyMaskanta.AddProgram("MLZ",0.21,20)
         MyMaskanta.calc()
         creature=MaskantaChild(1,"ancestor",MyMaskanta)
         #GAL=MaskantaGAL(3,10,10,PrintLevel=0)
         GAL=MaskantaGAL(10,100,100,PrintLevel=0)
         GAL.addAncestor(creature)
         if(1):
-            GAL.setMaxPayment(5150)
+            GAL.setMaxPayment(7000)
+            GAL.setFirstPayment(4800)
             GAL.Run()
             GAL.PrintSummary()
         else:

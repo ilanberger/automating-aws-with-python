@@ -122,6 +122,6 @@ class CRIBIT:
     def GetRIBIT_limit(self):
         return self.limit
     def UseMadad(self):
-        if(self.RIBIT_Type in ["MLZ","KLZ"]):
+        if(self.RIBIT_Type in ["MLZ","KLZ","PRIME"]):
             return False
         return True

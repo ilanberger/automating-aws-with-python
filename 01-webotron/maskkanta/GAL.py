@@ -45,7 +45,11 @@ class MaskantaChild:
         """
         #programsNumbers=list(range(1,self.Maskanta.Nprograms())) #started from 1 , 0 is prime no changeTime
         programsNumbers=copy.copy(self.Maskanta.GetProgramsNotLocked())
-        randomselectedprogram=random.randint(0,len(programsNumbers)-1)
+        randomplace=random.randint(0,len(programsNumbers)-1)
+
+        randomselectedprogram=programsNumbers.pop(randomplace)
+
+
         time = random.randint(-5,5)
         #print("{} {}".format(randomselectedprogram,time))
         self.Maskanta.changeTime(randomselectedprogram,time)
@@ -59,6 +63,7 @@ class MaskantaChild:
         them randomly select percent to move from program a to b
         percent select range (-5::5])
         """
+
         programsNumbers=copy.copy(self.Maskanta.GetProgramsNotLocked())
         #programsNumbers=list(range(1,self.Maskanta.Nprograms())) #started from 1 , 0 is prime no changeTime
         randomselectedprogram=random.randint(0,len(programsNumbers)-1)
@@ -80,7 +85,9 @@ class MaskantaChild:
 
     def Run(self):
         if(self.isDataValid == False):
-            self.Maskanta.calc() # calc will amke sure all data is valid
+            res=self.Maskanta.calc() # calc will amke sure all data is valid
+            if(res==-1):
+                print("failed to calc {}".self.GetSerial())
             self.isDataValid = True
             self.addyear()
 

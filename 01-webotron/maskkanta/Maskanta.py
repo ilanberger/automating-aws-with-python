@@ -73,7 +73,7 @@ class Maskanta:
     def checkallvaluesvalid(self):
         #print("total part of maskanta {}".format(self.TotalPecent) )
         if (abs(self.TotalPecent - 1))>0.001:
-            print("didn't get 100% of Prgrams (got {}%])".format(self.TotalPecent ))
+            print("didn't get 100% of Prgrams (got {}%])".format(self.TotalPecent))
             return False
         for program in self._programs:
             if not(program.GetRIBIT_Type() in ["PRIME","KZ","KLZ","MLZ","MZ"]):
@@ -217,11 +217,19 @@ class Maskanta:
 
 if __name__ == "__main__":
 
-    MyMaskanta=Maskanta("low",800000)
-    MyMaskanta.addMadad(1)
+    MyMaskanta=Maskanta("low",900000)
+    """
     MyMaskanta.AddProgram("MZ",1/3,10,programsLocked=True)
     MyMaskanta.AddProgram("PRIME",1/3,30)
     MyMaskanta.AddProgram("KLZ",1/3,20,6)
+    """
+    MyMaskanta.addMadad(1.5)
+    MyMaskanta.AddProgram("PRIME",0.33,29,programsLocked=False)
+    MyMaskanta.AddProgram("MZ",0.0,0)
+    MyMaskanta.AddProgram("KLZ",0.29,19)
+    MyMaskanta.AddProgram("KZ",0.0,0)
+    MyMaskanta.AddProgram("MLZ",0.38,20)
+
     b=MyMaskanta.GetProgramsNotLocked()
     print(MyMaskanta.GetProgramsNotLocked())
 

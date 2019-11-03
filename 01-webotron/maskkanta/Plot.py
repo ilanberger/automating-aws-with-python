@@ -144,26 +144,28 @@ class PrintMaskanta:
 
 
 def PlotExamples():
-    PV=800000
+    PV=900000
 
     MyMaskanta=Maskanta("low",PV)
-    MyMaskanta.addMadad(1)
-    MyMaskanta.AddProgram("PRIME",0.33,30)
-    MyMaskanta.AddProgram("MZ",0.15,10)
-    MyMaskanta.AddProgram("KLZ",0.17,20)
-    MyMaskanta.AddProgram("KZ",0.15,20)
-    MyMaskanta.AddProgram("MZ",0.10,20)
-    MyMaskanta.AddProgram("MLZ",0.10,20)
+    MyMaskanta.addMadad(1.5)
+    MyMaskanta.AddProgram("PRIME",0.33,24)
+    #MyMaskanta.AddProgram("MZ",0.25,25)
+    MyMaskanta.AddProgram("KLZ",0.29,20)
+    #MyMaskanta.AddProgram("KZ",0.1,25)
+    #MyMaskanta.AddProgram("MZ",0.14,25)
+    MyMaskanta.AddProgram("MLZ",0.38,21)
     MyMaskanta.calc()
-    creature=MaskantaChild(1,"ancestor",MyMaskanta)
+    creature=MaskantaChild(1,"MADAD 1.5",MyMaskanta)
 
     MyMaskanta1=Maskanta("low",PV)
     MyMaskanta1.addMadad(1)
-    MyMaskanta1.AddProgram("PRIME",0.33,30)
-    MyMaskanta1.AddProgram("KLZ",0.37,20)
-    MyMaskanta1.AddProgram("MZ",0.30,20)
+    MyMaskanta1.AddProgram("PRIME",0.33,25)
+    MyMaskanta1.AddProgram("KZ",0.27,15)
+    #MyMaskanta1.AddProgram("KLZ",0.37,20)
+    MyMaskanta1.AddProgram("MZ",0.40,21)
+
     MyMaskanta1.calc()
-    creature1 = MaskantaChild(2,"programA",MyMaskanta1)
+    creature1 = MaskantaChild(2,"MADAD 1",MyMaskanta1)
 
     MyMaskanta2=Maskanta("low",PV)
     MyMaskanta2.addMadad(1)
@@ -180,16 +182,15 @@ def PlotExamples():
     MyMaskanta3.calc()
     creature3 = MaskantaChild(2,"Best short prime",MyMaskanta3)
 
-
     PM=PrintMaskanta()
     PM.SetSavePath("/Users/iberger/Documents/temp/")
     PM.AddMaskantaGAL(creature)
     PM.AddMaskantaGAL(creature1)
-    PM.AddMaskantaGAL(creature2)
-    PM.AddMaskantaGAL(creature3)
+    #PM.AddMaskantaGAL(creature2)
+    #PM.AddMaskantaGAL(creature3)
 
 
-    PM.PlotReturn(5000)
+    PM.PlotReturn(4800)
     PM.PlotSUMLeft()
     PM.PlotMadad1()
     PM.PlotRribits(0)
@@ -258,6 +259,6 @@ def RunMultiGal(outpath,totalAmount = 800000 ):
     plt.clf()
 
 if __name__ == "__main__":
-    #PlotExamples()
-    outpath="/Users/iberger/Documents/temp/"
-    RunMultiGal(outpath,800000)
+    PlotExamples()
+    #outpath="/Users/iberger/Documents/temp/"
+    #RunMultiGal(outpath,800000)
