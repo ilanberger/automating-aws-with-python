@@ -225,5 +225,5 @@ if __name__ == "__main__":
     print(MyMaskanta._programsNotLocked)
     MyMaskanta.calc(False)
     print(MyMaskanta.GetProgramsNotLocked())
-    #MyMaskanta.printSummary(5)
+    MyMaskanta.printSummary(5)
     #MyMaskanta.PrintTable()

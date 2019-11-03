@@ -235,6 +235,7 @@ def RunMultiGal(outpath,totalAmount = 800000 ):
     print(return_list)
     print(MaxPayment_list)
     print(FirstPayment_list)
+    print(TotalTime_list)
 
 
     """TotalAmont_list = [980956, 941408, 923116, 914217, 907371, 896502]
