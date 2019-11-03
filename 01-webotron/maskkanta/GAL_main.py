@@ -126,6 +126,18 @@ class MaskantaGAL:
             return True
         return False
 
+    def _childConstantCheck(self,n):
+        total_Constant=0
+        child =self._childern[n]
+        programs=child.Getprograms()
+        for program in programs:
+            if(program.GetName() in ["KLZ","KZ"]):
+                total_Constant += program.GetPecent()
+        #print("total_prime {}".format(total_prime))
+        if(total_Constant>=0.33):
+            return True
+        return False
+
 
     def KillBadresults(self):
         newchildlist = []
@@ -237,9 +249,9 @@ class MaskantaGAL:
 
 
 if __name__ == "__main__":
-        MyMaskanta=Maskanta("low",800000)
-        MyMaskanta.addMadad(1)
-        MyMaskanta.AddProgram("PRIME",0.33,30,programsLocked=False)
+        MyMaskanta=Maskanta("low",900000)
+        MyMaskanta.addMadad(1.5)
+        MyMaskanta.AddProgram("PRIME",0.33,30,programsLocked=True)
         MyMaskanta.AddProgram("MZ",0.15,10)
         MyMaskanta.AddProgram("KLZ",0.17,20)
         MyMaskanta.AddProgram("KZ",0.15,20)
@@ -247,11 +259,11 @@ if __name__ == "__main__":
         MyMaskanta.AddProgram("MLZ",0.10,20)
         MyMaskanta.calc()
         creature=MaskantaChild(1,"ancestor",MyMaskanta)
-        GAL=MaskantaGAL(3,10,10,PrintLevel=0)
-        #GAL=MaskantaGAL(10,100,100,PrintLevel=0)
+        #GAL=MaskantaGAL(3,10,10,PrintLevel=0)
+        GAL=MaskantaGAL(10,100,100,PrintLevel=0)
         GAL.addAncestor(creature)
         if(1):
-            GAL.setMaxPayment(5000)
+            GAL.setMaxPayment(5150)
             GAL.Run()
             GAL.PrintSummary()
         else:
