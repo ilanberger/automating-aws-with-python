@@ -2,7 +2,8 @@
 from MaskantaProgram import *
 class Maskanta:
     """Maskanta class."""
-
+    def __repr__(self):
+        return "Maskanta"
     def __init__(self,limit,presetValue):
         """Create a Maskanta objet."""
         self.limit = limit
@@ -39,6 +40,8 @@ class Maskanta:
         return self._firstpayment
     def Nprograms(self):
         return len(self._programs)
+    def Getprograms(self):
+        return self._programs
     def getTotalLeft(self):
         return self._Sumleft
     def getAvgTime(self):

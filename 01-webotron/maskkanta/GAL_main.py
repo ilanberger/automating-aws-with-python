@@ -65,14 +65,13 @@ class MaskantaGAL:
     def createChildern(self):
 
         N=0
-
         while(len(self._childern)<self.TotalChilds):
             temp = copy.deepcopy(self._childern[N])
             self._childern.append(temp)
             self._childern[-1].SetSerial(self.SerialNumber)
             self.SerialNumber +=1
-
             N+=1
+
         self.UpdateChildrenData()
 
 
@@ -115,6 +114,18 @@ class MaskantaGAL:
             return True
         return False
 
+    def _childPrimeCheck(self,n):
+        total_prime=0
+        child =self._childern[n]
+        programs=child.Getprograms()
+        for program in programs:
+            if(program.GetName() in ["PRIME"]):
+                total_prime += program.GetPecent()
+        #print("total_prime {}".format(total_prime))
+        if(total_prime<=0.33):
+            return True
+        return False
+
 
     def KillBadresults(self):
         newchildlist = []
@@ -131,13 +142,13 @@ class MaskantaGAL:
             vallist.sort()
             MaxPaycutoff=vallist[self.SaveNextGen]
 
-        for i in range(len(self._childernDic["MaxPayment"])):
+        for i in range(len(self._childern)):
 
             #check new child is ok
-            KeepChild=True
-            KeepChild= KeepChild  & (self._childcheckMaxPayment(n,MaxPaycutoff))
-
-
+            KeepChild_maxpayment = self._childcheckMaxPayment(n,MaxPaycutoff)
+            KeepChild_primecheck = self._childPrimeCheck(n)
+            KeepChild = KeepChild_maxpayment & KeepChild_primecheck
+            #print("\n {} KeepChild {} (KeepChild_maxpayment {} KeepChild_primecheck {})".format(n,KeepChild,KeepChild_maxpayment,KeepChild_primecheck))
             if(KeepChild==True):
                 newchildlist.append(self._childern[n])
             else:
@@ -146,7 +157,7 @@ class MaskantaGAL:
         self._childern = newchildlist
         "some child were deleted need to doplecate others"
         self.createChildern()
-
+        KeepChild_maxpayment
 
     def RunRandomChange(self):
         self.savepreviousRun()
@@ -236,8 +247,8 @@ if __name__ == "__main__":
         MyMaskanta.AddProgram("MLZ",0.10,20)
         MyMaskanta.calc()
         creature=MaskantaChild(1,"ancestor",MyMaskanta)
-        #GAL=MaskantaGAL(3,10,10,PrintLevel=0)
-        GAL=MaskantaGAL(10,100,100,PrintLevel=0)
+        GAL=MaskantaGAL(3,10,10,PrintLevel=0)
+        #GAL=MaskantaGAL(10,100,100,PrintLevel=0)
         GAL.addAncestor(creature)
         if(1):
             GAL.setMaxPayment(5000)

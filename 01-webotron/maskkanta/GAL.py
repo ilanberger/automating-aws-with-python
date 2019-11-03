@@ -4,6 +4,11 @@ import copy
 import random
 
 class MaskantaChild:
+    def __repr__(self):
+        TotalAmont , MaxPayment , FirstPayment = self.GetMaskandaData()
+        return '<{} {} {} {}\n' .format(
+            self.__class__,self.GetSerial(), TotalAmont ,len(self.Getprograms()))
+
     def __init__(self,age,serial,Maskanta=None):
         if(Maskanta!=None):
             self.copyMaskanta(Maskanta)
@@ -29,6 +34,8 @@ class MaskantaChild:
     def GetRibits(self):
         ProgramNames , ProgramValues = self.Maskanta.GetRibits(self)
         return ProgramNames , ProgramValues
+    def Getprograms(self):
+        return self.Maskanta.Getprograms()
 
     def ChangeTime(self,debuglevel=0):
         """
@@ -70,6 +77,7 @@ class MaskantaChild:
 
     def getTotalLeft(self):
         return self.Maskanta.getTotalLeft()
+
     def Run(self):
         if(self.isDataValid == False):
             self.Maskanta.calc() # calc will amke sure all data is valid
@@ -81,7 +89,7 @@ class MaskantaChild:
         MaxPayment = round(self.Maskanta.GetMaxPayment())
         FirstPayment = round(self.Maskanta.GetFirstPayment())
         return TotalAmont , MaxPayment , FirstPayment
-        
+
     def GetAvgTime(self):
         return self.Maskanta.getAvgTime()
 
