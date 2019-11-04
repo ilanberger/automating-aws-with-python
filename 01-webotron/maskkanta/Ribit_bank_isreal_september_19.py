@@ -15,8 +15,8 @@ value["MLZ"]={}
 value["MZ"]={}
 
 prime=1.75
-prime_delat=-0.85
-value["PRIME"]["high"]         = [prime-prime_delat]*8
+prime_delat=-0.55
+value["PRIME"]["high"]         = [prime+prime_delat]*8
 value["PRIME"]["low"]          = value["PRIME"]["high"]
 
 

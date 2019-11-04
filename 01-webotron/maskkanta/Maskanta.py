@@ -224,11 +224,12 @@ if __name__ == "__main__":
     MyMaskanta.AddProgram("KLZ",1/3,20,6)
     """
     MyMaskanta.addMadad(1.5)
-    MyMaskanta.AddProgram("PRIME",0.33,29,programsLocked=False)
-    MyMaskanta.AddProgram("MZ",0.0,0)
-    MyMaskanta.AddProgram("KLZ",0.29,19)
-    MyMaskanta.AddProgram("KZ",0.0,0)
-    MyMaskanta.AddProgram("MLZ",0.38,20)
+    MyMaskanta.AddProgram("PRIME",0.33,29,1.26)
+    #MyMaskanta.AddProgram("MZ",0.0,0)
+    MyMaskanta.AddProgram("KLZ",0.335,15,2.73)
+    MyMaskanta.AddProgram("KLZ",0.335,19,3.03)
+    #MyMaskanta.AddProgram("KZ",0.0,0)
+    #MyMaskanta.AddProgram("MLZ",0.38,20)
 
     b=MyMaskanta.GetProgramsNotLocked()
     print(MyMaskanta.GetProgramsNotLocked())

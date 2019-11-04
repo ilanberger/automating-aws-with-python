@@ -260,7 +260,7 @@ class MaskantaGAL:
 
 if __name__ == "__main__":
         MyMaskanta=Maskanta("low",900000)
-        MyMaskanta.addMadad(1)
+        MyMaskanta.addMadad(1.5)
         MyMaskanta.AddProgram("PRIME",0.33,30,programsLocked=False)
         MyMaskanta.AddProgram("MZ",0.13,10)
         MyMaskanta.AddProgram("KLZ",0.13,20)
