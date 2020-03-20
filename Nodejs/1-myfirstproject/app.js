@@ -9,7 +9,7 @@ var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/mymessages');
+mongoose.connect('mongodb://localhost/mymessages',{useNewUrlParser: true,useUnifiedTopology: true});
 
 
 var app = express();

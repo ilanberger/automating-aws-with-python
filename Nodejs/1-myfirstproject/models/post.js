@@ -8,3 +8,15 @@ const postSchema = new mongoose.Schema({
 
 module.exports = new mongoose.model('Post', postSchema);
 
+
+
+
+//mongoose.connect('mongodb://localhost:27017/myapp', {useNewUrlParser: true});
+//var MyModel = mongoose.model('Test', new Schema({ name: String }));
+// Works
+//MyModel.findOne(function(error, result) { /* ... */ });
+
+
+
+//const conn = mongoose.createConnection('mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]', options);
+//const UserModel = conn.model('User', userSchema);
