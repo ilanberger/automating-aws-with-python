@@ -7,6 +7,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index_ilan');
 var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
+var stocksRouter = require('./routes/stocks');
+
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/mymessages',{useNewUrlParser: true,useUnifiedTopology: true});
@@ -27,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
+app.use('/stocks', stocksRouter);
 
 
 // catch 404 and forward to error handler

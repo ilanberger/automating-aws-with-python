@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+//mongoose.connect('mongodb://localhost/mymessages',{useNewUrlParser: true,useUnifiedTopology: true});
+
 const postSchema = new mongoose.Schema({
     author: { type: String, required: true },
     color: { type: String, default: '#333' },
@@ -20,3 +22,4 @@ module.exports = new mongoose.model('Post', postSchema);
 
 //const conn = mongoose.createConnection('mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]', options);
 //const UserModel = conn.model('User', userSchema);
+//https://mongoosejs.com/docs/connections.html#multiple_connections
