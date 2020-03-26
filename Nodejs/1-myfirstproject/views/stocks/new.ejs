@@ -2,40 +2,64 @@
 <html>
         <body style="background-color:powderblue;">
 <head>
-    <title>Edit Post Form</title>
+    <title>Edit Stock Form</title>
 </head>
 
 <body>
         <h1>Stock program new</h1>
         <a href='/stocks'>Back</a>
-        <% if (post.errors) { %>
+        <% if (stock.errors) { %>
             <h2>Errors found in form</h2>
             <ul>
-                <% for (let msg of Object.values(post.errors)) { %>
+                <% for (let msg of Object.values(stock.errors)) { %>
                     <li><%= msg %></li>
                 <% } %>
             </ul>
         <% } %>
     
 
-    <form action="/posts" method="POST" enctype="multipart/form-data">
+    <form action="/stocks" method="POST" enctype="multipart/form-data">
         <div>
             <label>
                 Author:
-                <input type="text" name="author" value="<%= post.author %>"/>
+                <input type="text" name="author" value="<%= stock.author %>"/>
             </label>
         </div>
         <div>
             <label>
+                Stock:
+                <input type="text" name="stock" value="<%= stock.stockname %>"/>
+            </label>
+        </div>
+        <div>
+            <label>
+                Date:
+                <input type="Date" name="Date" value="<%= stock.date %>"/>
+            </label>
+        </div>
+        <div>
+            <label>
+            Value:
+                <input type="float" name="value" value="<%= stock.stockvalue %>"/>
+            </label>
+        </div>
+        <div>
+            <label>
+                GetValue:
+                    <input type="float" name="getValue" value="<%= stock.stockvalue_get %>"/>
+                </label>
+            </div>
+        <div>
+            <label>
                 Text:
-                <textarea name="text"><%= post.text %></textarea>
+                <textarea name="text"><%= stock.text %></textarea>
             </label>
         </div>
 
         <div>
             <label>
                 Color:
-                <input type="color" name="color" value="<%= post.color %>" />
+                <input type="color" name="color" value="<%= stock.color %>" />
             </label>
         </div>
 
@@ -45,7 +69,7 @@
                 <input type="file" name="postpic" accept="image/*" />
             </label>
         </div>        
-        <input type="submit" value="Post" />
+        <input type="submit" value="Save" />
     </form>
 </body>
 

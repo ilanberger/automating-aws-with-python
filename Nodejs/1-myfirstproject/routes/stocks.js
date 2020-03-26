@@ -22,7 +22,8 @@ const postPhotoUpload = multer({
 // GET /posts/new
 router.get('/new', function(req, res, next) {
     const stock = new Stock();
-    res.render('stocks/new', { post: stock });
+    //res.render('stocks/new', { post: stock });
+    res.render('stocks/new', { stock: stock });
 });
 
 // GET /posts
@@ -64,7 +65,7 @@ router.post('/', postPhotoUpload, async function(req, res, next) {
         res.redirect('/stocks');
     } catch {
         console.log(stock.errors);
-        res.render('stocks/new', { post: stock });
+        res.render('stocks/new', { stock: stock });
     }
 });
 
